@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "待付款订单",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "wxc-icon": "../../dist/packages/@minui/wxc-icon/dist/index"
+  }
+}

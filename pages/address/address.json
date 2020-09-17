@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "选择收货地址",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "wxc-icon": "../../dist/packages/@minui/wxc-icon/dist/index"
+  }
+}

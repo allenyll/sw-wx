@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "搜索",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "van-search": "../../dist/packages/@vant//search/index",
+    "van-icon": "../../dist/packages/@vant/icon/index"
+  }
+} 

@@ -1,0 +1,11 @@
+{
+    "navigationBarTitleText": "订单详情",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black",
+    "usingComponents": {
+      "wxc-icon": "../../dist/packages/@minui/wxc-icon/dist/index",
+      "van-steps": "../../dist/packages/@vant/steps/index",
+      "van-notice-bar": "../../dist/packages/@vant/notice-bar/index",
+      "van-count-down": "../../dist/packages/vant-weapp/count-down/index"
+    }
+}
