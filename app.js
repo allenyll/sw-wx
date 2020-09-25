@@ -12,7 +12,7 @@ App({
         success: res => {
           if (res.code) {
             wx.request({
-              url: that.globalData.baseUrl+'/api-uac/uac/wx/auth',
+              url: that.globalData.authUrl+'/wx/auth/token',
               data: {
                 code: res.code
               },
@@ -22,14 +22,13 @@ App({
                 'login-type': 'wx'
               },
               success: function (res) {
-                console.log(res.data.token);
-                var token = res.data.token;
-                var openid = token.substring(token.indexOf("#") + 1, token.length);
+                console.log(res);
+                var token = res.data.object.accessToken;
+                var openid = res.data.object.openid;
                 that.globalData.openid = openid;
                 that.globalData.token = token;
                 wx.setStorageSync('openid', openid);
                 wx.setStorageSync('token', token);
-                //that.getCategory();
               }
             });
           }  
@@ -113,6 +112,7 @@ App({
     openid: 0,  
     token:'',
     baseUrl: 'https://localhost',
+    authUrl: 'https://localhost:8443',
     bearer: 'Bearer ',
     logType: ',JWT_WX',
     onLoadStatus: true,

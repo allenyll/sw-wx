@@ -7,7 +7,7 @@ const http = (url, data, header, method) => {
       method: method,
       data: data,
       header: {
-        'Authorization': app.globalData.bearer + wx.getStorageSync('token'),
+        'Authorization': wx.getStorageSync('token'),
         'content-type': 'application/json',
         'login-type': 'wx'
       },

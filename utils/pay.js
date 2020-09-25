@@ -14,7 +14,7 @@ function wxpay(app, money, orderId, redirectUrl, type) {
     method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
     // 当method 为POST 时 设置以下 的header 
     header: { 
-      'Authorization': app.globalData.bearer + wx.getStorageSync('token'),
+      'Authorization': wx.getStorageSync('token'),
       'content-type': 'application/x-www-form-urlencoded',
       'login-type': 'wx' 
       },
@@ -37,7 +37,7 @@ function wxpay(app, money, orderId, redirectUrl, type) {
           url: app.globalData.baseUrl + '/api-pay/pay/sign',
           method: 'POST',
           header: { 
-            'Authorization': app.globalData.bearer + wx.getStorageSync('token'),
+            'Authorization': wx.getStorageSync('token'),
             'content-type': 'application/x-www-form-urlencoded',
             'login-type': 'wx' 
           },

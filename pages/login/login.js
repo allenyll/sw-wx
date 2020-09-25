@@ -37,8 +37,8 @@ Page({
         data: e.detail.userInfo,
         method: "POST",
         header: {
-          'Authorization': app.globalData.bearer + app.globalData.token + app.globalData.logType,
-          'content-type': 'application/json',
+          'Authorization': app.globalData.token,
+          'content-type': 'application/json'
         },
         success: function (res) {
           //从数据库获取用户信息
@@ -68,7 +68,7 @@ Page({
       url: app.globalData.baseUrl + '/wx/queryUserByOpenId?openid=' + app.globalData.openid,
       method: "POST",
       header: {
-        'Authorization': app.globalData.bearer + app.globalData.token + app.globalData.logType,
+        'Authorization': app.globalData.token
       },
       success: function (res) {
         var user = res.data.customer;

@@ -49,9 +49,14 @@ Page({
           //用户按了允许授权按钮
           var that = this;
           //插入登录的用户的相关信息到数据库
-          http('/api-wx/wx/wxLogin', e.detail.userInfo, '', 'post').then(res => {
-            //从数据库获取用户信息
-            that.queryUserInfo();
+          http('/api-web/customer/updateCustomer', e.detail.userInfo, '', 'post').then(res => {
+            if (res.success) {
+              //从数据库获取用户信息
+              that.queryUserInfo();
+            } else {
+              dialog.dialog('警告', res.message, false, '确定')
+            }
+            
           })
           //授权成功后，跳转进入小程序首页
           wx.switchTab({
@@ -66,18 +71,22 @@ Page({
   queryUserInfo:function(){
     var that = this;
     var openid = wx.getStorageSync('openid');
-    http('/api-wx/wx/queryUserByOpenId?openid=' + openid,'', '', 'post').then(res => {
-      var user = res.data.customer;
+    http('/api-web/customer/queryUserByOpenId?openid=' + openid,'', '', 'post').then(res => {
+      if (!res.success) {
+        dialog.dialog('警告', '授权失败!!!', false, '返回授权')
+        return
+      }
+      var user = res.object;
       if (undefined == user) {
         dialog.dialog('警告', '授权失败!!!', false, '返回授权')
         return
       }
-      var customerPoint = res.data.customerPoint;
+      var customerPoint = user.customerPoint;
       var point = 0;
       if (undefined != customerPoint) {
         point = customerPoint.point;
       }
-      var customerBalance = res.data.customerBalance;
+      var customerBalance = user.customerBalance;
       var balance = 0;
       if (undefined != customerBalance) {
         balance = customerBalance.balance;
@@ -93,8 +102,8 @@ Page({
       that.setData({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true,
-        point: customerPoint == undefined ? 0 : customerPoint.point,
-        balance: customerBalance == undefined ? 0: customerBalance.balance
+        point: point,
+        balance: balance
       })
     })
   },
@@ -113,7 +122,7 @@ Page({
               iv: e.detail.iv,
               encryptedData: e.detail.encryptedData
             }
-            http('/wx/getPhoneNumber', param, '', 'post').then(res => {
+            http('/api-web/customer/getPhoneNumber', param, '', 'post').then(res => {
               console.log(res)
               that.queryUserInfo();
               //用户已经授权过

@@ -38,8 +38,16 @@ Page({
   onLoad: function (options) {
     var that = this
     if (app.globalData.userInfo != null) {
-      var sex = Number(app.globalData.userInfo.gender);
-      console.log(sex)
+      console.log(app.globalData.userInfo.gender)
+      let gender = app.globalData.userInfo.gender
+      if (gender === 'SW0201') {
+        gender = 1
+      } else if (gender === 'SW0202') {
+        gender = 0
+      } else {
+        gender = 3
+      }
+      let sex = Number(gender);
       if(0 != sex && 1 != sex){
         this.setData({
           index: 2
@@ -52,7 +60,6 @@ Page({
       that.setData({
         userInfo: app.globalData.userInfo
       })
-      console.log(that.data.userInfo)
     }
   },
 

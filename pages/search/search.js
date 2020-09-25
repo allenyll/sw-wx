@@ -68,7 +68,7 @@ Page({
     let that = this;
     var param = {
       keyword: that.data.keyword,
-      pkCustomerId: app.globalData.userInfo.pkCustomerId
+      customerId: app.globalData.userInfo.pkCustomerId
     }
     http('/api-cms/keywords/getKeywords', param, '', 'post').then(res => {
       if (res.code == '100000') {
