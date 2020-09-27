@@ -25,7 +25,7 @@ function wxpay(app, money, orderId, redirectUrl, type) {
       payName: "在线支付",
       nextAction: nextAction,
       openid: wx.getStorageSync('openid'),
-      customerId: app.globalData.userInfo.pkCustomerId,
+      customerId: app.globalData.userInfo.id,
       orderId: orderId
     },
     //method:'POST',
@@ -34,7 +34,7 @@ function wxpay(app, money, orderId, redirectUrl, type) {
         transactionId = res.data.transaction_id
         // 再次签名
         wx.request({
-          url: app.globalData.baseUrl + '/api-pay/pay/sign',
+          url: app.globalData.baseUrl + '/api-web/pay/sign',
           method: 'POST',
           header: { 
             'Authorization': wx.getStorageSync('token'),
@@ -60,11 +60,11 @@ function wxpay(app, money, orderId, redirectUrl, type) {
                     const _param = {
                       orderId: orderId
                     }
-                    http('/api-order/order/sendMessage', _param, '', 'post').then(_res => {
+                    http('/api-web/order/sendMessage', _param, '', 'post').then(_res => {
                       if (_res.code == '100000') {
                         if (redirectUrl != '') {
                           wx.redirectTo({
-                            url: redirectUrl + '?id='+ escape(app.globalData.userInfo.pkCustomerId)
+                            url: redirectUrl + '?id='+ escape(app.globalData.userInfo.id)
                           });
                         }
                       }
@@ -83,10 +83,10 @@ function wxpay(app, money, orderId, redirectUrl, type) {
                     const param = {
                       openid: wx.getStorageSync('openid'),
                       amount: money,
-                      customerId: app.globalData.userInfo.pkCustomerId,
+                      customerId: app.globalData.userInfo.id,
                       remark: remark
                     }
-                    http('/api-member/customerBalance/updateBalance', param, '', 'post').then(res => {       
+                    http('/api-web/customerBalance/updateBalance', param, '', 'post').then(res => {       
                       // 更新支付记录状态为成功
                       if(res.code == '100000'){
                         wx.redirectTo({
@@ -108,9 +108,9 @@ function wxpay(app, money, orderId, redirectUrl, type) {
                       type: type,
                       orderId: orderId
                     }
-                    http('/api-pay/pay/updateStatus', _param, '', 'post').then(res =>                     {
+                    http('/api-web/pay/updateStatus', _param, '', 'post').then(res =>                     {
                       wx.redirectTo({
-                        url: redirectUrl + '?id='+ escape(app.globalData.userInfo.pkCustomerId)
+                        url: redirectUrl + '?id='+ escape(app.globalData.userInfo.id)
                       });
                     })
                   }

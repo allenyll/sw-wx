@@ -126,7 +126,7 @@ Page({
       param.name = that.data.curAddressData.name;
       param.phone = that.data.curAddressData.phone;
       param.postCode = that.data.curAddressData.postCode;
-      param.fkAddressId = that.data.curAddressData.pkAddressId;
+      param.addressId = that.data.curAddressData.id;
       param.goodsList = JSON.stringify(that.data.goodsList);
       const list = that.data.goodsList;
       var giftGrowth = 0;
@@ -148,25 +148,25 @@ Page({
     param.discountAmount = that.data.discountAmount;
     param.promotionAmount = that.data.promotionAmount;
     param.integrationAmount = that.data.integrationAmount;
-    param.fkCustomerId = app.globalData.userInfo.pkCustomerId;
+    param.customerId = app.globalData.userInfo.id;
     if (!e) {
       param.calculate = "true";
     }
 
     console.log(param)
-    http('/api-order/order/createOrder', param, null, 'post').then(res => {
+    http('/api-web/order/createOrder', param, null, 'post').then(res => {
       if(res.code == '100000'){
         wx.hideLoading();
         if ("buyNow" != that.data.orderType) {
           // 清空购物车数据
           wx.removeStorageSync('cartInfo');
         }
-        that.data.orderId = res.data.order.pkOrderId;
+        that.data.orderId = res.data.order.id;
         // 发起支付
         wxpay.wxpay(app, this.data.totalAmount, this.data.orderId, '/pages/my/order-list/order', "order");
         // 跳转到支付页
       //   wx.redirectTo({
-      //      url: "/pages/pay/pay?orderId="+res.order.pkOrderId+"&totalAmount="+that.data.totalAmount
+      //      url: "/pages/pay/pay?orderId="+res.order.id+"&totalAmount="+that.data.totalAmount
       //  });
       }else{
         wx.hideLoading();
@@ -178,9 +178,9 @@ Page({
   initAddress: function () {
     var that = this;
     var param = {
-      customerId: app.globalData.userInfo.pkCustomerId
+      customerId: app.globalData.userInfo.id
     }
-    http('/api-member/customerAddress/getAddressList', param, null, 'post').then(res => {
+    http('/api-web/customerAddress/getAddressList', param, null, 'post').then(res => {
       if (res.code == '100000') {
         if(res.data.data.length > 0){
           for(let i=0; i < res.data.data.length; i++) {
@@ -236,9 +236,9 @@ Page({
 
   getCoupon: function() {
     var param = {
-      customerId: app.globalData.userInfo.pkCustomerId
+      customerId: app.globalData.userInfo.id
     }
-    http('/api-market/coupon/getCouponList', param, null, 'post').then(res => {
+    http('/api-web/coupon/getCouponList', param, null, 'post').then(res => {
       if (res.code == '100000') {
         const coupons = res.data.list;
         if (coupons.length > 0) {

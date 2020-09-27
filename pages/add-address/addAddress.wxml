@@ -58,7 +58,7 @@
     </view>
     <button class="save-btn" formType="submit">保存</button>
     <button wx:if="{{!addressData}}" type="primary" class="save-btn" bindtap="readFromWx">从微信读取</button>
-    <button type="default" class="save-btn" bindtap="deleteAddress" data-id="{{addressData.pkAddressId}}" wx:if="{{addressData}}">删除该地址</button>
+    <button type="default" class="save-btn" bindtap="deleteAddress" data-id="{{addressData.id}}" wx:if="{{addressData}}">删除该地址</button>
     <button type="default" class="cancel-btn" bindtap="bindCancel">取消</button>
     </form>
 </view>

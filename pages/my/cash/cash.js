@@ -20,9 +20,9 @@ Page({
   getBalance: function () {
     let that = this;
     var param = {
-      customerId: app.globalData.userInfo.pkCustomerId
+      customerId: app.globalData.userInfo.id
     }
-    http('/api-member/customerBalance/getBalance', param, '', 'POST').then(res => {
+    http('/api-web/customerBalance/getBalance', param, '', 'POST').then(res => {
       that.setData({
         balance: Number(res.data.customerBalance.balance)
       });
@@ -49,7 +49,7 @@ Page({
       })
     } else {
       wx.navigateTo({
-        url: '/pages/my/cash/balancedetail/balancedetail?id=' + escape(app.globalData.userInfo.pkCustomerId),
+        url: '/pages/my/cash/balancedetail/balancedetail?id=' + escape(app.globalData.userInfo.id),
       })
     }
   },

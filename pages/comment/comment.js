@@ -39,7 +39,7 @@ Page({
   getOrder() {
     var that = this;
     // 获取本地存储的订单列表
-    http('/api-order/orderDetail/getOrderDetail/' + that.data.orderId, '', '', 'post').then(res => {
+    http('/api-web/orderDetail/getOrderDetail/' + that.data.orderId, '', '', 'post').then(res => {
       if (res.code == '100000') {
         this.setData({
           goodsList: res.data.order.orderDetails

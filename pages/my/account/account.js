@@ -102,7 +102,7 @@ Page({
     if (that.data.index != 2) {
       param.sex = that.data.index
     }
-    http('/wx/updateCustomer', param , '', 'post').then(res => {
+    http('/api-web/customer/updateCustomerAccount', param , '', 'post').then(res => {
       dialog.showToast('保存成功', 'success', '', 2000)
     })
   },

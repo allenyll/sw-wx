@@ -10,7 +10,7 @@ Page({
 
   selectTap: function (e) {
     var id = e.currentTarget.dataset.id;
-    http('/api-member/customerAddress/updateAddress/'+id, null, null, 'post').then(res => {
+    http('/api-web/customerAddress/updateAddress/'+id, null, null, 'post').then(res => {
       if(res.code == '100000'){
         wx.navigateBack({
           type: 'select'
@@ -50,9 +50,9 @@ Page({
   initAddress: function () {
     var that = this;
     var param = {
-      customerId: app.globalData.userInfo.pkCustomerId
+      customerId: app.globalData.userInfo.id
     }
-    http('/api-member/customerAddress/getAddressList', param, null, 'post').then(res => {
+    http('/api-web/customerAddress/getAddressList', param, null, 'post').then(res => {
       if (res.code == '100000') {
         if (res.data.data.length > 0) {
           that.setData({

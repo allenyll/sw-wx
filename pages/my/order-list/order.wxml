@@ -62,7 +62,7 @@
                       <view style='padding-top:15rpx;' wx:if="{{item.orderRemark && item.orderRemark != ''}}">备注： {{item.orderRemark}}</view>
                     </view>
                   </view> -->
-                  <view bindtap="clickOrderDetail" data-id="{{item.pkOrderId}}">
+                  <view bindtap="clickOrderDetail" data-id="{{item.id}}">
                     <scroll-view class="goods-img-container" scroll-x="true">
                       <view class="img-box" wx:for-items="{{item.orderDetails}}" wx:key="{{index}}" wx:for-item="goodsItem">
                         <image src="{{goodsItem.pic}}" class="goods-img"></image>
@@ -75,19 +75,19 @@
                     <!-- <view class="total-price" wx:if="{{item.integration > 0}}">合计：¥ {{item.totalAmount}} + {{item.integration}} 积分</view> -->
                     <view style='display: flex; flex-direction:row; justify-content: space-between;'>
                       <view hidden="{{item.orderStatus == 'SW0701'? fslse : true}}" style="float:right ;margin-left:10rpx;">
-                      <van-button type="default" size="small" bindtap="getCancelReason" data-id="{{item.pkOrderId}}" >取消订单</van-button>
+                      <van-button type="default" size="small" bindtap="getCancelReason" data-id="{{item.id}}" >取消订单</van-button>
                       </view>
                       <view hidden="{{item.orderStatus == 'SW0701'? fslse : true}}" style="float:right ;margin-left:10rpx;">
-                      <van-button type="warning" size="small" bindtap="toPayTap" data-id="{{item.pkOrderId}}" data-money="{{item.totalAmount}}"  data-score="{{item.integration}}">立即支付</van-button>
+                      <van-button type="warning" size="small" bindtap="toPayTap" data-id="{{item.id}}" data-money="{{item.totalAmount}}"  data-score="{{item.integration}}">立即支付</van-button>
                       </view>
                       <view hidden="{{item.orderStatus == 'SW0703'? fslse : true}}" style="float:right ;margin-left:10rpx;">
-                      <van-button type="primary" size="small" bindtap="receiveOrderTap" data-id="{{item.pkOrderId}}" >确认收货</van-button>
+                      <van-button type="primary" size="small" bindtap="receiveOrderTap" data-id="{{item.id}}" >确认收货</van-button>
                       </view>
                       <view  hidden="{{item.orderStatus == 'SW0704'? fslse : true}}" style="float:right ;margin-left:10rpx;">
-                      <van-button type="info" size="small"bindtap="appraiseOrderTap" data-id="{{item.pkOrderId}}" >立即评价</van-button>
+                      <van-button type="info" size="small"bindtap="appraiseOrderTap" data-id="{{item.id}}" >立即评价</van-button>
                       </view>
                       <view hidden="{{item.orderStatus == 'SW0707'? fslse : true}}" style="float:right ;margin-left:10rpx;">
-                      <van-button type="danger" size="small" bindtap="deleteTap" data-id="{{item.pkOrderId}}" >删除订单</van-button>
+                      <van-button type="danger" size="small" bindtap="deleteTap" data-id="{{item.id}}" >删除订单</van-button>
                       </view>
                     </view>
                     <!--<view class="btn cancel-btn" hidden="{{item.status==0? fslse : true}}" bindtap="cancelOrderTap" data-id="{{item.id}}">取消订单</view>

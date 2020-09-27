@@ -92,9 +92,9 @@ Page({
       isDefault: _isDefault,
       isSelect: _isDefault,
       openid: wx.getStorageSync('openid'),
-      fkCustomerId: app.globalData.userInfo.pkCustomerId
+      customerId: app.globalData.userInfo.id
     }
-    http('/api-member/customerAddress/setAddress', param, null, 'post').then(res => {
+    http('/api-web/customerAddress/setAddress', param, null, 'post').then(res => {
       if(res.code == '100000'){
         dialog.showToast(mark + '成功', 'success', '', 2000)
         wx.navigateBack({})
@@ -171,7 +171,7 @@ Page({
     if (id) {
       // 初始化原数据
       wx.showLoading();
-      http('/api-member/customerAddress/'+id, null, null, 'get').then(res => {
+      http('/api-web/customerAddress/'+id, null, null, 'get').then(res => {
         if (res.code == '100000') {
           that.setData({
             id: id,
@@ -227,14 +227,14 @@ Page({
     var that = this;
     var id = e.currentTarget.dataset.id;
     var param = {
-      eq_pk_address_id: id
+      eq_id: id
     }
     wx.showModal({
       title: '提示',
       content: '确定要删除该收货地址吗？',
       success: function (res) {
         if (res.confirm) {
-          http("/api-member/customerAddress/"+id, param, null, 'delete').then(res => {
+          http("/api-web/customerAddress/"+id, param, null, 'delete').then(res => {
             if(res.code == '100000'){
               wx.navigateBack({})
             }else{

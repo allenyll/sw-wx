@@ -34,7 +34,7 @@ Page({
       title: '加载中...',
     });
     // 加载商品分类
-    http('/api-product/category/tree', param, '', 'GET').then(res => {
+    http('/api-web/category/tree', param, '', 'GET').then(res => {
       if (res.code == '100000') {
         that.setData({
           navList: res.data.list,
@@ -46,7 +46,7 @@ Page({
   },
   getCurrentCategory: function (id) {
     let that = this;
-    http('/api-product/category/'+id, '', '', 'get')
+    http('/api-web/category/'+id, '', '', 'get')
       .then(function (res) {
         that.setData({
           currentCategory: res.data.tree[0]

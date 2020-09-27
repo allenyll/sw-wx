@@ -37,7 +37,7 @@ Page({
   },
   getCategoryInfo: function () {
     let that = this;
-    http('/api-product/category/getCategoryInfo/' + this.data.id, null, '', 'get')
+    http('/api-web/category/getCategoryInfo/' + this.data.id, null, '', 'get')
       .then(function (res) {
         if (res.code === '100000') {
           that.setData({
@@ -108,7 +108,7 @@ Page({
       return;
     }
 
-    http("/api-product/goods/getGoods", {categoryId: that.data.id, page: that.data.page, limit: that.data.size}, '', 'post')
+    http("/api-web/goods/getGoods", {categoryId: that.data.id, page: that.data.page, limit: that.data.size}, '', 'post')
       .then(function (res) {
         console.log(res)
         if(res.code === '100000'){

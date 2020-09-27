@@ -15,7 +15,7 @@ Page({
     hotKeyword: [],
     page: 1,
     size: 20,
-    currentSortType: 'pk_goods_id',
+    currentSortType: 'id',
     currentSortOrder: 'desc',
     categoryId: ''
   },
@@ -38,9 +38,9 @@ Page({
     // TODO授权
     console.log(app.globalData.userInfo);
     var param = {
-      userId: app.globalData.userInfo.pkCustomerId
+      userId: app.globalData.userInfo.id
     }
-    http('/api-cms/keywords/getSearchKeyword', param, '', 'post').then(res => {
+    http('/api-web/keywords/getSearchKeyword', param, '', 'post').then(res => {
       if (res.code == '100000') {
         that.setData({
           historyKeyword: res.data.historyKeywords,
@@ -68,9 +68,9 @@ Page({
     let that = this;
     var param = {
       keyword: that.data.keyword,
-      customerId: app.globalData.userInfo.pkCustomerId
+      customerId: app.globalData.userInfo.id
     }
-    http('/api-cms/keywords/getKeywords', param, '', 'post').then(res => {
+    http('/api-web/keywords/getKeywords', param, '', 'post').then(res => {
       if (res.code == '100000') {
         console.log(res)
         that.setData({
@@ -86,9 +86,9 @@ Page({
     // TODO授权
     console.log(app.globalData.userInfo);
     var param = {
-      userId: app.globalData.userInfo.pkCustomerId
+      userId: app.globalData.userInfo.id
     }
-    http('/api-cms/searchHistory/clearHistoryKeyword', param, '', 'post').then(res => {
+    http('/api-web/searchHistory/clearHistoryKeyword', param, '', 'post').then(res => {
       if (res.code == '100000') {
         this.setData({
           historyKeyword: []
@@ -113,9 +113,9 @@ Page({
       sort: that.data.currentSortType, 
       order: that.data.currentSortOrder, 
       categoryId: that.data.categoryId,
-      userId: app.globalData.userInfo.pkCustomerId
+      userId: app.globalData.userInfo.id
     }
-    http('/api-product/goods/searchGoods', param, '', 'post').then(res => {
+    http('/api-web/goods/searchGoods', param, '', 'post').then(res => {
       if (res.code == '100000') {
         this.setData({
           searchStatus: true,

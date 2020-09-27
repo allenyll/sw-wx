@@ -51,7 +51,7 @@ Page({
   },
   onShow: function () {
     var that = this;
-    http('/api-order/orderDetail/getOrderDetail/'+that.data.orderId, '', '', 'post').then(res => {
+    http('/api-web/orderDetail/getOrderDetail/'+that.data.orderId, '', '', 'post').then(res => {
       if(res.code == '100000'){
         that.setData({
           orderDetail: res.data.order
@@ -81,7 +81,7 @@ Page({
       success: function (res) {
         if (res.confirm) {
           wx.showLoading();
-          http('/api-order/order/receiveOrder/' + orderId, '', '', 'post').then(res => {
+          http('/api-web/order/receiveOrder/' + orderId, '', '', 'post').then(res => {
             wx.hideLoading();
             if (res.code == '100000') {
               that.onShow();
@@ -112,7 +112,7 @@ Page({
             note: '您取消了订单',
             orderId: orderId
           }
-          http('/api-order/order/cancelMiniOrder', param, '', 'post').then(res => {
+          http('/api-web/order/cancelMiniOrder', param, '', 'post').then(res => {
             wx.hideLoading();
             if (res.code == '100000') {
               that.onShow();
@@ -134,11 +134,11 @@ Page({
       success: function (res) {
         if (res.confirm) {
           wx.showLoading();
-          http('/api-order/order/deleteOrder/' + orderId, '', '', 'post').then(res => {
+          http('/api-web/order/deleteOrder/' + orderId, '', '', 'post').then(res => {
             wx.hideLoading();
             if (res.code == '100000') {
               wx.redirectTo({
-                url: '/pages/my/order-list/order?id=' + escape(app.globalData.userInfo.pkCustomerId),
+                url: '/pages/my/order-list/order?id=' + escape(app.globalData.userInfo.id),
               })
             } else {
               dialog.dialog('错误', '删除订单异常，请联系管理员!', false, '确定');

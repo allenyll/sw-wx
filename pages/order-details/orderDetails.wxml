@@ -151,11 +151,11 @@
   </view>
 
   <view class="btn-bottom">
-    <view class="btn btn-red" wx:if="{{orderDetail.orderStatus == 'SW0701'}}" bindtap="toPayTap" data-id="{{orderDetail.pkOrderId}}">去支付</view>
-    <view class="btn btn-blue" wx:if="{{orderDetail.orderStatus == 'SW0701'}}" bindtap="cancelOrderTap" data-id="{{orderDetail.pkOrderId}}">取消订单</view>
-    <view class="btn btn-red" wx:elif="{{orderDetail.orderStatus == 'SW0703'}}" bindtap="receiveOrderTap" data-id="{{orderDetail.pkOrderId}}">确认收货</view>
-    <view class="btn btn-red" wx:elif="{{orderDetail.orderStatus == 'SW0704'}}" bindtap="appraiseOrderTap" data-id="{{orderDetail.pkOrderId}}">立即评价</view>
-    <view class="btn btn-white" bindtap="deleteOrderTap" data-id="{{orderDetail.pkOrderId}}">删除订单</view>
+    <view class="btn btn-red" wx:if="{{orderDetail.orderStatus == 'SW0701'}}" bindtap="toPayTap" data-id="{{orderDetail.id}}">去支付</view>
+    <view class="btn btn-blue" wx:if="{{orderDetail.orderStatus == 'SW0701'}}" bindtap="cancelOrderTap" data-id="{{orderDetail.id}}">取消订单</view>
+    <view class="btn btn-red" wx:elif="{{orderDetail.orderStatus == 'SW0703'}}" bindtap="receiveOrderTap" data-id="{{orderDetail.id}}">确认收货</view>
+    <view class="btn btn-red" wx:elif="{{orderDetail.orderStatus == 'SW0704'}}" bindtap="appraiseOrderTap" data-id="{{orderDetail.id}}">立即评价</view>
+    <view class="btn btn-white" bindtap="deleteOrderTap" data-id="{{orderDetail.id}}">删除订单</view>
   </view>
 
 </view>

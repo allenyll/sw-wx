@@ -75,7 +75,7 @@ Page({
         app.globalData.userInfo = user;
         //授权成功后，跳转进入小程序首页
         wx.redirectTo({
-          url: that.data.url + '?id=' + escape(app.globalData.userInfo.pkCustomerId)
+          url: that.data.url + '?id=' + escape(app.globalData.userInfo.id)
         })
       },
       fail: function (res) {

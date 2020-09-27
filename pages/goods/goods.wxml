@@ -1,7 +1,7 @@
 <scroll-view class="container" style="height: {{winHeight}}rpx" scroll-y="true">
   <view wx:if="{{!openAttr}}">
     <swiper class="goodsimgs" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
-      <swiper-item wx:for="{{gallery}}" wx:key="{{pkFileId}}">
+      <swiper-item wx:for="{{gallery}}" wx:key="{{id}}">
         <image src="{{item.fileUrl}}" background-size="cover"></image>
       </swiper-item>
     </swiper>
@@ -13,11 +13,11 @@
     <view class="goods-info">
       <view class="c">
         <text class="name">{{goods.goodsName}}</text>
-        <text class="desc">{{goods.goodsBrief}}</text>
+        <text class="desc" wx:if="{{goods.goodsBrief}}">{{goods.goodsBrief}}</text>
         <text class="price">￥{{goods.price}}</text>
-        <view class="brand" wx:if="{{brand.name}}">
+        <view class="brand" wx:if="{{brand.brandName}}">
           <navigator url="../brandDetail/brandDetail?id={{brand.brandId}}">
-            <text>{{brand.name}}</text>
+            <text>{{brand.brandName}}</text>
           </navigator>
         </view>
       </view>

@@ -21,7 +21,7 @@ Page({
       magType: 'SW2702'
     }
     // 通知
-    http('/api-market/message/getMessageById', param, '', 'post').then(res => {
+    http('/api-web/message/getMessageById', param, '', 'post').then(res => {
       if (res.code == '100000') {
         that.setData({
           notice: res.data.message

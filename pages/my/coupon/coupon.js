@@ -16,9 +16,9 @@ Page({
     console.log("aa")
     var that = this;
     var param = {
-      customerId: app.globalData.userInfo.pkCustomerId
+      customerId: app.globalData.userInfo.id
     }
-    http('/api-market/coupon/getCouponList', param, null, 'post').then(res => {
+    http('/api-web/coupon/getCouponList', param, null, 'post').then(res => {
       if (res.code == '100000') {
         console.log(res)
         const coupons = res.data.list;

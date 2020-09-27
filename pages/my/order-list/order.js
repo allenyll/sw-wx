@@ -80,7 +80,7 @@ Page({
     var param = {
       customerId: that.data.customerId
     }
-    http('/api-order/order/getOrderNum', param, '', 'post').then(res => {
+    http('/api-web/order/getOrderNum', param, '', 'post').then(res => {
       if (res.code == '100000') {
         var tabClass = that.data.tabClass;
         if (res.data.unPayNum> 0) {
@@ -126,7 +126,7 @@ Page({
       customerId: that.data.customerId
     };
     console.log('getting orderList')
-    http('/api-order/order/getOrderList', param, '', 'post').then(res => {
+    http('/api-web/order/getOrderList', param, '', 'post').then(res => {
       if (res.code == '100000') {
         that.setData({
           totalOrderList: res.data.list,
@@ -184,7 +184,7 @@ Page({
             note: that.data.radio,
             orderId: orderId
           }
-          http('/api-order/order/cancelMiniOrder', param, '', 'post').then(res => {
+          http('/api-web/order/cancelMiniOrder', param, '', 'post').then(res => {
             wx.hideLoading();
             that.onClose();
             if(res.code == '100000'){
@@ -213,7 +213,7 @@ Page({
       success: function (res) {
         if (res.confirm) {
           wx.showLoading();
-          http('/api-order/order/deleteOrder/' + orderId, '', '', 'post').then(res => {
+          http('/api-web/order/deleteOrder/' + orderId, '', '', 'post').then(res => {
             wx.hideLoading();
             if (res.code == '100000') {
               that.onShow();
@@ -234,7 +234,7 @@ Page({
       success: function (res) {
         if (res.confirm) {
           wx.showLoading();
-          http('/api-order/order/receiveOrder/' + orderId, '', '', 'post').then(res => {
+          http('/api-web/order/receiveOrder/' + orderId, '', '', 'post').then(res => {
             wx.hideLoading();
             if (res.code == '100000') {
               that.onShow();

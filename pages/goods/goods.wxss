@@ -86,6 +86,7 @@ view,image,text,navigator {
 
 
 .goods-info .price{
+    margin-top: 20rpx;
     height: 35rpx;
     font-size: 35rpx;
     line-height: 35rpx;

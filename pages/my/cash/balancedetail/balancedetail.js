@@ -60,11 +60,11 @@ Page({
       action = 'SW0502';
     }
     var param = {
-      'customerId': app.globalData.userInfo.pkCustomerId,
+      'customerId': app.globalData.userInfo.id,
       'action': action,
       'page': page || 1
     }
-    http('/api-member/customerBalanceDetail/getBalanceDetail', param, '', 'post').then(res => {
+    http('/api-web/customerBalanceDetail/getBalanceDetail', param, '', 'post').then(res => {
       switch (type) {
         // 全部
         case 'all':

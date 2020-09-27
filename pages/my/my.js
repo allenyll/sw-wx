@@ -56,7 +56,6 @@ Page({
             } else {
               dialog.dialog('警告', res.message, false, '确定')
             }
-            
           })
           //授权成功后，跳转进入小程序首页
           wx.switchTab({
@@ -146,7 +145,7 @@ Page({
       })
     } else {
       wx.navigateTo({
-        url: '/pages/my/account/account?id=' + escape(app.globalData.userInfo.pkCustomerId),
+        url: '/pages/my/account/account?id=' + escape(app.globalData.userInfo.id),
       })
     }
   },
@@ -162,7 +161,7 @@ Page({
       })
     } else {
       wx.navigateTo({
-        url: '/pages/my/point/point?id=' + escape(app.globalData.userInfo.pkCustomerId),
+        url: '/pages/my/point/point?id=' + escape(app.globalData.userInfo.id),
       })
     }
   },
@@ -175,7 +174,7 @@ Page({
       })
     } else {
       wx.navigateTo({
-        url: '/pages/my/cash/cash?id=' + escape(app.globalData.userInfo.pkCustomerId),
+        url: '/pages/my/cash/cash?id=' + escape(app.globalData.userInfo.id),
       })
     }
   },
@@ -201,7 +200,7 @@ Page({
       })
     }else{
       wx.navigateTo({
-        url: '/pages/my/order-list/order?id=' + escape(app.globalData.userInfo.pkCustomerId),
+        url: '/pages/my/order-list/order?id=' + escape(app.globalData.userInfo.id),
       })
     }
   },
@@ -217,7 +216,7 @@ Page({
       })
     } else {
       wx.navigateTo({
-        url: '/pages/address/address?id=' + escape(app.globalData.userInfo.pkCustomerId),
+        url: '/pages/address/address?id=' + escape(app.globalData.userInfo.id),
       })
     }
   },
@@ -234,7 +233,7 @@ Page({
       })
     } else {
       wx.navigateTo({
-        url: '/pages/my/coupon/coupon?id=' + escape(app.globalData.userInfo.pkCustomerId),
+        url: '/pages/my/coupon/coupon?id=' + escape(app.globalData.userInfo.id),
       })
     }
   },

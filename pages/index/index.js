@@ -38,7 +38,7 @@ Page({
       msgType: 'SW2702'
     }
     // 通知
-    http('/api-market/message/getMessageListByType', param, '', 'post').then(res => {
+    http('/api-web/message/getMessageListByType', param, '', 'post').then(res => {
       if (res.code == '100000') {
         that.setData({
           notices: res.data.messageList
@@ -49,7 +49,7 @@ Page({
       }
     });
     // 轮播
-    http('/api-market/ad/getAdList', param, '', 'post').then(res => {
+    http('/api-web/ad/getAdList', param, '', 'post').then(res => {
       if (res.code == '100000') {
         that.setData({
           banner: res.data.adList
@@ -60,7 +60,7 @@ Page({
       }
     });
     // 新品
-    http('/api-product/goods/getGoodsListByType', {goodsType: 'new'}, '', 'post').then(res => {
+    http('/api-web/goods/getGoodsListByType', {goodsType: 'new'}, '', 'post').then(res => {
       if (res.code == '100000') {
         that.setData({
           newGoods: res.data.goodsList
@@ -71,7 +71,7 @@ Page({
       }
     });
     // 热卖
-    http('/api-product/goods/getGoodsListByType', { goodsType: 'hot' }, '', 'post').then(res => {
+    http('/api-web/goods/getGoodsListByType', { goodsType: 'hot' }, '', 'post').then(res => {
       if (res.code == '100000') {
         that.setData({
           hotGoods: res.data.goodsList

@@ -413,7 +413,7 @@ Page({
         var param = {
           id: cartBean.goodsId
         }
-        http('/api-product/goods/getGoodsInfo/' + cartBean.goodsId, null, null, 'POST').then(res => {
+        http('/api-web/goods/getGoodsInfo/' + cartBean.goodsId, null, null, 'POST').then(res => {
           if (res.code === '100000') {
             doneNumber++;
             if (res.data.obj.status == 'SW1402') {
@@ -442,7 +442,7 @@ Page({
           }
         })
       } else {
-        http('/api-product/goods/getGoodsInfo/' + cartBean.goodsId, null, null, 'POST').then(res => {
+        http('/api-web/goods/getGoodsInfo/' + cartBean.goodsId, null, null, 'POST').then(res => {
           if (res.code === '100000') {
             doneNumber++;
             that.getSku(res.data.obj.skuStockList, cartBean.specValue)
