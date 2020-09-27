@@ -10,7 +10,7 @@ function wxpay(app, money, orderId, redirectUrl, type) {
     console.log(orderId)
   }
   wx.request({
-    url: app.globalData.baseUrl + '/api-pay/pay/createUnifiedOrder',
+    url: app.globalData.baseUrl + '/api-web/pay/createUnifiedOrder',
     method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
     // 当method 为POST 时 设置以下 的header 
     header: { 
@@ -95,7 +95,7 @@ function wxpay(app, money, orderId, redirectUrl, type) {
                         // const _param = {
                         //   transactionId: transactionId
                         // }
-                        // http('/api-pay/pay/updateStatus', _param, '', 'post').then(res => {
+                        // http('/api-web/pay/updateStatus', _param, '', 'post').then(res => {
                         //   wx.redirectTo({
                         //     url: redirectUrl
                         //   });
