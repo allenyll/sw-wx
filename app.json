@@ -9,6 +9,7 @@
     "pages/my/recharge/charge",
     "pages/my/vip/vip",
     "pages/my/coupon/coupon",
+    "pages/my/location/location",
     "pages/selCoupon/selCoupon",
     "pages/index/index",
     "pages/class/class",
@@ -24,6 +25,11 @@
     "pages/pay/pay",
     "pages/comment/comment"
   ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
