@@ -131,14 +131,17 @@ Page({
       const list = that.data.goodsList;
       var giftGrowth = 0;
       var goodsIntegral = 0;
+      var goodsCount = 0;
       if(list.length > 0){
         for (var i = 0; i < list.length; i++){
           giftGrowth += list[i].giftGrowth;
           goodsIntegral += list[i].goodsIntegral;
+          goodsCount +=list[i].number;
         }
       }
       param.goodsIntegral = goodsIntegral;
       param.giftGrowth = giftGrowth;
+      param.goodsCount = goodsCount;
     }
     param.logisticsFee = that.data.logisticsFee;
     param.totalAmount = that.data.totalAmount;

@@ -31,7 +31,7 @@ function wxpay(app, money, orderId, redirectUrl, type) {
     //method:'POST',
     success: function (res) {
       if (res.data.code == '100000') {
-        transactionId = res.data.transaction_id
+        transactionId = res.data.data.transaction_id
         // 再次签名
         wx.request({
           url: app.globalData.baseUrl + '/api-web/pay/sign',
@@ -42,17 +42,17 @@ function wxpay(app, money, orderId, redirectUrl, type) {
             'login-type': 'wx' 
           },
           data: {
-            prepayId: res.data.prepayId
+            prepayId: res.data.data.prepayId
           },
           success: function(res){
-            if(res.data.sign != ''){
+            if(res.data.data.sign != ''){
               // 发起支付
               wx.requestPayment({
-                timeStamp: res.data.timeStamp,
-                nonceStr: res.data.nonceStr,
-                package: res.data.package,
+                timeStamp: res.data.data.timeStamp,
+                nonceStr: res.data.data.nonceStr,
+                package: res.data.data.package,
                 signType: 'MD5',
-                paySign: res.data.sign,
+                paySign: res.data.data.sign,
                 fail: function (res) {
                   if ('order' == type) {
                     // 支付取消或者失败
@@ -108,7 +108,7 @@ function wxpay(app, money, orderId, redirectUrl, type) {
                       type: type,
                       orderId: orderId
                     }
-                    http('/api-web/pay/updateStatus', _param, '', 'post').then(res =>                     {
+                    http('/api-web/pay/updateStatus', _param, '', 'post').then(res => {
                       wx.redirectTo({
                         url: redirectUrl + '?id='+ escape(app.globalData.userInfo.id)
                       });

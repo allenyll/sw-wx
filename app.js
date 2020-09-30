@@ -6,35 +6,35 @@ App({
   onLaunch: function () {
     var that = this;
     console.log('编译完成：'+wx.getStorageSync('token'));
-    var authToken = wx.getStorageSync('token');
-    if (authToken == undefined || authToken == '' || authToken == null) {
-      wx.login({
-        success: res => {
-          if (res.code) {
-            wx.request({
-              url: that.globalData.authUrl+'/wx/auth/token',
-              data: {
-                code: res.code
-              },
-              method: "POST",
-              header: {
-                'content-type': 'application/json',
-                'login-type': 'wx'
-              },
-              success: function (res) {
-                console.log(res);
-                var token = res.data.object.accessToken;
-                var openid = res.data.object.openid;
-                that.globalData.openid = openid;
-                that.globalData.token = token;
-                wx.setStorageSync('openid', openid);
-                wx.setStorageSync('token', token);
-              }
-            });
-          }  
-        }
-      });
-    }
+    // var authToken = wx.getStorageSync('token');
+    // if (authToken == undefined || authToken == '' || authToken == null) {
+    wx.login({
+      success: res => {
+        if (res.code) {
+          wx.request({
+            url: that.globalData.authUrl+'/wx/auth/token',
+            data: {
+              code: res.code
+            },
+            method: "POST",
+            header: {
+              'content-type': 'application/json',
+              'login-type': 'wx'
+            },
+            success: function (res) {
+              console.log(res);
+              var token = res.data.object.accessToken;
+              var openid = res.data.object.openid;
+              that.globalData.openid = openid;
+              that.globalData.token = token;
+              wx.setStorageSync('openid', openid);
+              wx.setStorageSync('token', token);
+            }
+          });
+        }  
+      }
+    });
+    // }
   },
 
   /**

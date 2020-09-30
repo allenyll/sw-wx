@@ -12,11 +12,39 @@ const http = (url, data, header, method) => {
         'login-type': 'wx'
       },
       success: function (res) {
-        if (res.statusCode != 200) {
+        if (res.statusCode == 200) {
+          resolve(res.data);
+        } else if (res.statusCode == 401) {
+          wx.login({
+            success: res => {
+              if (res.code) {
+                wx.request({
+                  url: app.globalData.authUrl+'/wx/auth/token',
+                  data: {
+                    code: res.code
+                  },
+                  method: "POST",
+                  header: {
+                    'content-type': 'application/json',
+                    'login-type': 'wx'
+                  },
+                  success: function (res) {
+                    var token = res.data.object.accessToken;
+                    var openid = res.data.object.openid;
+                    app.globalData.openid = openid;
+                    app.globalData.token = token;
+                    wx.setStorageSync('openid', openid);
+                    wx.setStorageSync('token', token);
+                    http(url, data, header, method).then(res => resolve(res));
+                  }
+                });
+              }  
+            }
+          });
+        } else {
           reject({ error: '服务器忙，请稍后重试', code: 500 });
           return;
         }
-        resolve(res.data);
       },
       fail: function (res) {
         // fail调用接口失败
