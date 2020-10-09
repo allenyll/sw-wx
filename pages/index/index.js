@@ -43,7 +43,7 @@ Page({
         that.setData({
           notices: res.data.messageList
         })
-        console.log(that.data.notices)
+        console.log(that.data.notices.length)
       } else {
         dialog.dialog('错误', '获取通知失败，请联系管理员!', false, '确定');
       }

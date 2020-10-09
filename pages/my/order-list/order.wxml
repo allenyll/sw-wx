@@ -36,7 +36,7 @@
                 <wxc-abnor type="ORDER" title='您还没有相关订单~'></wxc-abnor>
               </view>
               <view wx:else class="order-list">
-                <view class="a-order" wx:for-items="{{item.orderList}}" wx:key="{{index}}">
+                <view class="a-order" wx:for-items="{{item.orderList}}" wx:key="index">
                   <view class="order-date">
                     <view class="date-box">下单时间：{{item.orderTime}}</view>
                     <view wx:if="{{item.orderStatus == 'SW0701'}}" class="status red">待付款</view>
@@ -64,7 +64,7 @@
                   </view> -->
                   <view bindtap="clickOrderDetail" data-id="{{item.id}}">
                     <scroll-view class="goods-img-container" scroll-x="true">
-                      <view class="img-box" wx:for-items="{{item.orderDetails}}" wx:key="{{index}}" wx:for-item="goodsItem">
+                      <view class="img-box" wx:for-items="{{item.orderDetails}}" wx:key="index" wx:for-item="goodsItem">
                         <image src="{{goodsItem.pic}}" class="goods-img"></image>
                       </view>
                       <view class="goods-count">共{{item.goodsCount}}件商品</view>
