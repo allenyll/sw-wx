@@ -113,6 +113,8 @@ App({
     token:'',
     baseUrl: 'https://localhost',
     authUrl: 'https://localhost:8443',
+    // baseUrl: 'https://www.allenyll.com',
+    // authUrl: 'https://www.allenyll.com':8443',
     bearer: 'Bearer ',
     logType: ',JWT_WX',
     onLoadStatus: true,

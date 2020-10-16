@@ -147,11 +147,13 @@
           <view class="num-jia {{buyNumber== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap">+</view>
         </view>
       </view>
-      <view class="popup-join-btn-l" bindtap="buyGoods">
-        立即购买
-      </view>
-      <view class="popup-join-btn-r" bindtap="addToCart">
-        加入购物车
+      <view class="popup-btn">
+        <view class="popup-join-btn-l" bindtap="buyGoods">
+          立即购买
+        </view>
+        <view class="popup-join-btn-r" bindtap="addToCart">
+          加入购物车
+        </view>
       </view>
     </view>
   </view>

@@ -60,66 +60,103 @@
   <!-- 分割段 -->
   <view class='line-view' style='width:100%;height:25rpx;background-color:#f4f4f4;'></view>
 
+  <view class='order-list'>
+    <view class="item-list">
+      <view class="item">
+        <view bindtap='clickOrder' hover-class="none" class="btn">
+          <wxc-icon type='feedback' size='32' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
+          <text class="txt">待付款</text>
+        </view>
+      </view>
+      <view class="item">
+        <view bindtap='clickOrder' hover-class="none" class="btn">
+          <wxc-icon type='feedback' size='32' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
+          <text class="txt">待发货</text>
+        </view>
+      </view>
+      <view class="item">
+        <view bindtap='clickOrder' hover-class="none" class="btn">
+          <wxc-icon type='feedback' size='32' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
+          <text class="txt">待收货</text>
+        </view>
+      </view>
+      <view class="item">
+        <view bindtap='clickOrder' hover-class="none" class="btn">
+          <wxc-icon type='feedback' size='32' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
+          <text class="txt">评价</text>
+        </view>
+      </view>
+      <view class="item">
+        <view bindtap='clickOrder' hover-class="none" class="btn">
+          <wxc-icon type='feedback' size='32' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
+          <text class="txt">退款/售后</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='line-view' style='width:100%;height:25rpx;background-color:#f4f4f4;'></view>
+
   <!-- 内容栏 -->
   <view class='my-content' style=''>
     <view class="item">
       <view bindtap='clickOrder' hover-class="none" class="a">
-        <wxc-icon type='feedback' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
+        <wxc-icon type='feedback' size='34' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
         <text class="txt">订单管理</text>
       </view>
     </view>
     <view class="item">
       <view bindtap='clickAddress' hover-class="none" class="a">
-        <wxc-icon type='address' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
+        <wxc-icon type='address' size='34' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
         <text class="txt">收货地址</text>
       </view>
     </view>
     <view class="item no-border-right">
       <navigator url="/pages/my/location/location" hover-class="none" class="a">
-        <wxc-icon type='location' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
+        <wxc-icon type='location' size='34' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
         <text class="txt">到店里</text>
       </navigator>
     </view>
 
     <view class="item">
       <view bindtap='clickCoupon' hover-class="none" class="a">
-        <wxc-icon type='coupon' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
+        <wxc-icon type='coupon' size='34' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
         <text class="txt">优惠券</text>
       </view>
     </view>
     <view class="item">
       <navigator url="" hover-class="none" class="a">
-        <wxc-icon type='rate' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
+        <wxc-icon type='rate' size='34' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
         <text class="txt" style='color:lightgray;text-decoration: line-through;'>积分兑换</text>
       </navigator>
     </view>
     <view class="item no-border-right">
       <navigator url="/pages/target/index" hover-class="none" class="a">
-        <wxc-icon type='footprint' size='{{iconSize}}' color='lightgray' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
+        <wxc-icon type='footprint' size='34' color='lightgray' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
         <text class="txt" style='color:lightgray;text-decoration: line-through;'>足迹</text>
       </navigator>
     </view>
 
     <view class="item item-bottom" bindtap='makePhoneCall'>
       <navigator url="" hover-class="none" class="a">
-        <wxc-icon type='group' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
+        <wxc-icon type='group' size='34' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
         <text class="txt" style='color:lightgray;text-decoration: line-through;'>联系客服</text>
       </navigator>
     </view>
     <view class="item item-bottom" bindtap="aboutUs">
       <navigator url="url" hover-class="none" class="a">
-        <wxc-icon type='help' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
+        <wxc-icon type='help' size='34' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
         <text class="txt" style='color:lightgray;text-decoration: line-through;'>关于我们</text>
       </navigator>
     </view>
     <view class="item no-border-bottom">
       <navigator url="/pages/ucenter/feedback/feedback" hover-class="none" class="a">
-        <wxc-icon type='comment' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
+        <wxc-icon type='comment' size='34' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
         <text class="txt" style='color:lightgray;text-decoration: line-through;'>意见反馈</text>
       </navigator>
     </view>
 
   </view>
 </view>
-<view class="version" style='position:fixed; width:750rpx; bottom:0;font-size:24rpx;text-align:center;'>Copyright © 2017-2019 allenyll(GitHub ID)</view>
+<view class="version" style='position:fixed; width:750rpx; bottom:0;font-size:24rpx;text-align:center;'>Copyright © 2017-2020 allenyll(GitHub ID)</view>
  
