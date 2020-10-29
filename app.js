@@ -5,7 +5,6 @@ App({
    */
   onLaunch: function () {
     var that = this;
-    console.log('编译完成：'+wx.getStorageSync('token'));
     // var authToken = wx.getStorageSync('token');
     // if (authToken == undefined || authToken == '' || authToken == null) {
     wx.login({
@@ -22,7 +21,6 @@ App({
               'login-type': 'wx'
             },
             success: function (res) {
-              console.log(res);
               var token = res.data.object.accessToken;
               var openid = res.data.object.openid;
               that.globalData.openid = openid;
@@ -56,11 +54,9 @@ App({
         'content-type': 'application/json',
       },
       success: function (res) {
-        console.log(res.data)
         var categories = []; //{ id: 0, name: "全品类" }
         if (res.data.code == '100000') {
           for (var i = 0; i < res.data.list.length; i++) {
-            console.log(res.data.list[i]);
             categories.push(res.data.list[i]);
           }
         }
@@ -70,7 +66,6 @@ App({
       fail: function () {
         that.globalData.onLoadStatus = false
         wx.hideLoading()
-        console.log('11')
       }
     })
     //getGoods(0);
@@ -111,10 +106,10 @@ App({
     userInfo:null,
     openid: 0,  
     token:'',
-    baseUrl: 'https://localhost',
-    authUrl: 'https://localhost:8443',
-    // baseUrl: 'https://www.allenyll.com',
-    // authUrl: 'https://www.allenyll.com':8443',
+    // baseUrl: 'https://localhost',
+    // authUrl: 'https://localhost:8443',
+    baseUrl: 'https://www.allenyll.com',
+    authUrl: 'https://www.allenyll.com:8443',
     bearer: 'Bearer ',
     logType: ',JWT_WX',
     onLoadStatus: true,

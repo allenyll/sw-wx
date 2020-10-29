@@ -4,6 +4,7 @@ var wxpay = require('../../../utils/pay.js')
 var app = getApp()
 Page({
   data: {
+    tabIndex: 0,
     tabs: ["所有订单", "待付款", "待发货", "待收货", "待评价"],
     tabDicts: ["SW0700", "SW0701", "SW0702", "SW0703", "SW0704"],
     tabClass: ["", "", "", "", ""],
@@ -53,15 +54,20 @@ Page({
   },
   onLoad: function (options) {
     console.log(unescape(options.id))
+    var type = options.type
+    console.log(type)
     try {
       let { tabs } = this.data;
       var res = wx.getSystemInfoSync()
       this.windowWidth = res.windowWidth;
       this.data.stv.lineWidth = this.windowWidth / this.data.tabs.length;
       this.data.stv.windowWidth = res.windowWidth;
+      var index = this.getArrayIndex(this.data.tabDicts, type)
+      console.log(index)
       this.setData({ 
         stv: this.data.stv, 
-        customerId: options.id
+        customerId: options.id,
+        tabIndex: index
       })
       this.tabsCount = tabs.length;
     } catch (e) {
@@ -74,6 +80,21 @@ Page({
     })
     this.getOrderStatistics();
     this.getOrderList()
+    this._updateSelectedPage(this.data.tabIndex)
+  },
+  /*
+  * 获取某个元素下标
+  * arr: 传入的数组
+  * obj: 需要获取下标的元素
+  * */
+  getArrayIndex(arr, obj) {
+    var i = arr.length;
+    while (i--) {
+        if (arr[i] === obj) {
+            return i;
+        }
+    }
+    return -1;
   },
   getOrderStatistics: function () {
     var that = this;

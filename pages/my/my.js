@@ -15,94 +15,129 @@ Page({
     showPhone: false,
     phone: '',
     point: 0,
-    balance: 0
+    balance: 0,
+    unPayNum: '',
+    unReceiveNum: '',
+    receiveNum: '',
+    appraisesNum: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;
-        // 查看是否授权
-        wx.getSetting({
-            success: function (res) {
-                if (res.authSetting['scope.userInfo']) {
-                    wx.getUserInfo({
-                        success: function (res) {
-                            that.data.hasUserInfo = true;
-                            //从数据库获取用户信息
-                            that.queryUserInfo();
-                            //用户已经授权过
-                            wx.switchTab({
-                                url: '/pages/my/my'
-                            })
-                        }
-                    });
-                }
-            }
-        })
   },
 
   getUserInfo: function (e) {
-      if (e.detail.userInfo) {
-          e.detail.userInfo.openid = wx.getStorageSync('openid')
-          //用户按了允许授权按钮
-          var that = this;
-          //插入登录的用户的相关信息到数据库
-          http('/api-web/customer/updateCustomer', e.detail.userInfo, '', 'post').then(res => {
-            if (res.success) {
-              //从数据库获取用户信息
-              that.queryUserInfo();
-            } else {
-              dialog.dialog('警告', res.message, false, '确定')
-            }
-          })
-          //授权成功后，跳转进入小程序首页
-          wx.switchTab({
-              url: '/pages/my/my'  
-          })
-      } else {
-          //用户按了拒绝按钮
-          dialog.dialog('警告', '您点击了拒绝授权，将无法进入小程序，请授权之后再进入!!!', false, '返回授权')
-      }
+    if (e.detail.userInfo) {
+      e.detail.userInfo.openid = wx.getStorageSync('openid')
+      //用户按了允许授权按钮
+      var that = this;
+      //插入登录的用户的相关信息到数据库
+      http('/api-web/customer/updateCustomer', e.detail.userInfo, '', 'post').then(res => {
+        if (res.success) {
+          //从数据库获取用户信息
+          that.queryUserInfo();
+        } else {
+          dialog.dialog('警告', res.message, false, '确定')
+        }
+      })
+      //授权成功后，跳转进入小程序首页
+      wx.switchTab({
+          url: '/pages/my/my'  
+      })
+    } else {
+      //用户按了拒绝按钮
+      dialog.dialog('警告', '您点击了拒绝授权，将无法进入小程序，请授权之后再进入!!!', false, '返回授权')
+    }
   },
 
-  queryUserInfo:function(){
+  queryUserInfo: async function(){
     var that = this;
     var openid = wx.getStorageSync('openid');
-    http('/api-web/customer/queryUserByOpenId?openid=' + openid,'', '', 'post').then(res => {
-      if (!res.success) {
-        dialog.dialog('警告', '授权失败!!!', false, '返回授权')
-        return
-      }
-      var user = res.object;
-      if (undefined == user) {
-        dialog.dialog('警告', '授权失败!!!', false, '返回授权')
-        return
-      }
-      var customerPoint = user.customerPoint;
-      var point = 0;
-      if (undefined != customerPoint) {
-        point = customerPoint.point;
-      }
-      var customerBalance = user.customerBalance;
-      var balance = 0;
-      if (undefined != customerBalance) {
-        balance = customerBalance.balance;
-      }
-      app.globalData.userInfo = user;
-      if (null != user.phone && '' != user.phone) {
-        var phoneNumber = user.phone
+    const res = await that.getUser(openid);
+    console.log(app.globalData.userInfo)
+    const res2 = await that.getOrderStatistics();
+  },
+
+  getUser: function(openid) {
+    var that = this
+    return new Promise((resolve, reject) => {
+      http('/api-web/customer/queryUserByOpenId?openid=' + openid,'', '', 'post').then(res => {
+        if (!res.success) {
+          dialog.dialog('警告', '授权失败!!!', false, '返回授权')
+          return
+        }
+        var user = res.object;
+        if (undefined == user) {
+          dialog.dialog('警告', '授权失败!!!', false, '返回授权')
+          return
+        }
+        var customerPoint = user.customerPoint;
+        var point = 0;
+        if (undefined != customerPoint) {
+          point = customerPoint.point;
+        }
+        var customerBalance = user.customerBalance;
+        var balance = 0;
+        if (undefined != customerBalance) {
+          balance = customerBalance.balance;
+        }
+        app.globalData.userInfo = user;
+        if (null != user.phone && '' != user.phone) {
+          var phoneNumber = user.phone
+          that.setData({
+            showPhone: true,
+            phone: phoneNumber.substring(0, 3) + '******' + phoneNumber.substring(9, 11)
+          })
+        }
         that.setData({
-          showPhone: true,
-          phone: phoneNumber.substring(0, 3) + '******' + phoneNumber.substring(9, 11)
+          userInfo: app.globalData.userInfo,
+          hasUserInfo: true,
+          point: point,
+          balance: balance
         })
-      }
-      that.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true,
-        point: point,
-        balance: balance
+      })
+    })
+  },
+
+  getOrderStatistics: function () {
+    var that = this;
+    var param = {
+      customerId: app.globalData.userInfo.id
+    }
+    return new Promise((resolve, reject) => {
+      http('/api-web/order/getOrderNum', param, '', 'post').then(res => {
+        if (res.code == '100000') {
+          console.log(res.data)
+          if (res.data.unPayNum > 0) {
+            that.data.unPayNum = res.data.unPayNum
+          } else {
+            that.data.unPayNum = ""
+          }
+          if (res.data.unReceiveNum > 0) {
+            that.data.unReceiveNum = res.data.unReceiveNum
+          } else {
+            that.data.unReceiveNum = ""
+          }
+          if (res.data.receiveNum > 0) {
+            that.data.receiveNum = res.data.receiveNum
+          } else {
+            that.data.receiveNum = ""
+          }
+          if (res.data.appraisesNum > 0) {
+            that.data.appraisesNum = res.data.appraisesNum
+          } else {
+            that.data.appraisesNum = ""
+          }
+          if (res.data.finishNum > 0) {
+            //tabClass[4] = "red-dot"
+          } else {
+            //tabClass[4] = ""
+          }
+        }else{
+          dialog.dialog('错误', '获取订单数量异常', false, '确定');
+        }
       })
     })
   },
@@ -191,16 +226,16 @@ Page({
   /**
    * 订单管理点击事件
    */
-  clickOrder: function(){
+  clickOrder: function(event){
     var that = this;
-    console.log(that.data.hasUserInfo)
+    var type = event.currentTarget.dataset.type
     if (that.data.hasUserInfo == false || app.globalData.userInfo == null) {
       wx.navigateTo({
         url: '/pages/login/login?mark=/pages/my/order-list/order',
       })
     }else{
       wx.navigateTo({
-        url: '/pages/my/order-list/order?id=' + escape(app.globalData.userInfo.id),
+        url: '/pages/my/order-list/order?id=' + escape(app.globalData.userInfo.id) + '&type='+type,
       })
     }
   },

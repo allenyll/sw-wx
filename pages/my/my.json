@@ -3,6 +3,7 @@
   "navigationBarBackgroundColor": "#0387FE",
   "navigationBarTextStyle": "white",
   "usingComponents": {
-    "wxc-icon": "../../dist/packages/@minui/wxc-icon/dist/index"
+    "wxc-icon": "../../dist/packages/@minui/wxc-icon/dist/index",
+    "van-icon": "../../dist/packages/vant-weapp/icon/index"
   }
 }

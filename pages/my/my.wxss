@@ -150,13 +150,37 @@ page{
 }
 
 .order-list{
-  width: 100%;
-  height: 140rpx;
+  width: 94%;
+  height: 200rpx;
   background: white;
   border-radius: 30rpx;
   font-size: 20rpx;
   color: #333;
   padding: 0 20rpx;
+}
+
+.order-list .all-order{
+  width: 94%;
+  height: 60rpx;
+  /* display: flex; */
+  font-size: 24rpx;  
+  border-bottom: 1rpx solid #f4f4f4;
+  padding: 0 18rpx;
+}
+
+.order-list .all-order .all-order-left{
+  height: 60rpx;
+  line-height: 60rpx;
+  float: left;
+  font-weight: 600;
+}
+
+.order-list .all-order .all-order-right{
+  height: 60rpx;
+  line-height: 60rpx;
+  float: right;
+  color: lightgray;
+  font-size: 22rpx;
 }
 
 .order-list .item-list{
@@ -195,8 +219,8 @@ page{
   float: left;
   width: 249rpx;
   height: 167.5rpx;/*187.5*/
-  border-top: 1rpx solid #EFEFEF; 
-  border-right: 1rpx solid #EFEFEF;
+  border-top: 1rpx solid #f4f4f4; 
+  border-right: 1rpx solid #f4f4f4;
   text-align: center;
 }
 
@@ -213,10 +237,10 @@ page{
   border-right: 0;
 }
 .my-content .item.item-bottom {
-  border-bottom: 1px solid #EFEFEF;
+  border-bottom: 1px solid #f4f4f4;
 }
 .my-content .item.no-border-bottom{
-  border-bottom: 1px solid #EFEFEF;
+  border-bottom: 1px solid #f4f4f4;
   border-right: none;
 }
 .my-content .icon{
