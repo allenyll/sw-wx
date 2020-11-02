@@ -76,12 +76,12 @@
       <view class="item">
         <view bindtap="clickOrder" data-type="SW0702" hover-class="none" class="btn">
           <van-icon name="logistics" info="{{unReceiveNum}}" size="20px" style="margin:15rpx 0 10rpx 0;"/>
-          <text class="txt">待发货{{unReceiveNum}}</text>
+          <text class="txt">待发货</text>
         </view>
       </view>
       <view class="item">
         <view bindtap="clickOrder" data-type="SW0703" hover-class="none" class="btn">
-          <van-icon name="send-gift-o" info="{{receiveNum}}" size="20px" style="margin:15rpx 0 10rpx 0;"/>
+          <van-icon name="send-gift-o" info="{{deliveryNum}}" size="20px" style="margin:15rpx 0 10rpx 0;"/>
           <text class="txt">待收货</text>
         </view>
       </view>
@@ -155,13 +155,13 @@
       </navigator>
     </view>
     <view class="item no-border-bottom">
-      <navigator url="/pages/ucenter/feedback/feedback" hover-class="none" class="a">
+      <navigator url="/pages/my/feedback/feedback" hover-class="none" class="a">
         <wxc-icon type="comment" size="34" color="{{iconColor}}" style="margin:15rpx 0 10rpx 0;"></wxc-icon>
-        <text class="txt" style="color:lightgray;text-decoration: line-through;">意见反馈</text>
+        <text class="txt">意见反馈</text>
       </navigator>
     </view>
 
   </view>
 </view>
-<view class="version" style="position:fixed; width:750rpx; bottom:0;font-size:24rpx;text-align:center;">Copyright © 2017-2020 allenyll(GitHub ID)</view>
+<view class="version" style="width:750rpx; bottom:0;font-size:24rpx;text-align:center;margin-top: 10rpx;">Copyright © 2017-2020 allenyll(GitHub ID)</view>
  

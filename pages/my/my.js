@@ -18,7 +18,7 @@ Page({
     balance: 0,
     unPayNum: '',
     unReceiveNum: '',
-    receiveNum: '',
+    deliveryNum: '',
     appraisesNum: ''
   },
 
@@ -26,6 +26,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(this.data)
   },
 
   getUserInfo: function (e) {
@@ -54,10 +55,9 @@ Page({
 
   queryUserInfo: async function(){
     var that = this;
-    var openid = wx.getStorageSync('openid');
-    const res = await that.getUser(openid);
-    console.log(app.globalData.userInfo)
-    const res2 = await that.getOrderStatistics();
+    var openid = await wx.getStorageSync('openid');
+    await that.getUser(openid);
+    await that.getOrderStatistics();
   },
 
   getUser: function(openid) {
@@ -66,11 +66,13 @@ Page({
       http('/api-web/customer/queryUserByOpenId?openid=' + openid,'', '', 'post').then(res => {
         if (!res.success) {
           dialog.dialog('警告', '授权失败!!!', false, '返回授权')
+          reject('授权失败!!!')
           return
         }
         var user = res.object;
         if (undefined == user) {
           dialog.dialog('警告', '授权失败!!!', false, '返回授权')
+          reject('授权失败!!!')
           return
         }
         var customerPoint = user.customerPoint;
@@ -97,6 +99,7 @@ Page({
           point: point,
           balance: balance
         })
+        resolve(res)
       })
     })
   },
@@ -109,33 +112,50 @@ Page({
     return new Promise((resolve, reject) => {
       http('/api-web/order/getOrderNum', param, '', 'post').then(res => {
         if (res.code == '100000') {
-          console.log(res.data)
           if (res.data.unPayNum > 0) {
-            that.data.unPayNum = res.data.unPayNum
+            that.setData({
+              unPayNum: res.data.unPayNum
+            })
           } else {
-            that.data.unPayNum = ""
+            that.setData({
+              unPayNum: ''
+            })
           }
           if (res.data.unReceiveNum > 0) {
-            that.data.unReceiveNum = res.data.unReceiveNum
+            that.setData({
+              unReceiveNum: res.data.unReceiveNum
+            })
           } else {
-            that.data.unReceiveNum = ""
+            that.setData({
+              unReceiveNum: ''
+            })
           }
-          if (res.data.receiveNum > 0) {
-            that.data.receiveNum = res.data.receiveNum
+          if (res.data.deliveryNum > 0) {
+            that.setData({
+              deliveryNum: res.data.deliveryNum
+            })
           } else {
-            that.data.receiveNum = ""
+            that.setData({
+              deliveryNum: ''
+            })
           }
           if (res.data.appraisesNum > 0) {
-            that.data.appraisesNum = res.data.appraisesNum
+            that.setData({
+              appraisesNum: res.data.appraisesNum
+            })
           } else {
-            that.data.appraisesNum = ""
+            that.setData({
+              appraisesNum: ''
+            })
           }
           if (res.data.finishNum > 0) {
             //tabClass[4] = "red-dot"
           } else {
             //tabClass[4] = ""
           }
+          resolve(res)
         }else{
+          reject(获取订单数量异常)
           dialog.dialog('错误', '获取订单数量异常', false, '确定');
         }
       })
@@ -285,7 +305,6 @@ Page({
    */
   onShow: function () {
     var that = this;
-    
     // 查看是否授权
     wx.getSetting({
       success: function (res) {
@@ -304,7 +323,6 @@ Page({
         }
       }
     })
-    
   },
 
   /**
@@ -325,7 +343,6 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
   },
 
   /**

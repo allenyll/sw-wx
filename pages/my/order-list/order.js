@@ -114,7 +114,7 @@ Page({
         } else {
           tabClass[1] = ""
         }
-        if (res.data.receiveNum > 0) {
+        if (res.data.deliveryNum > 0) {
           tabClass[2] = "red-dot"
         } else {
           tabClass[2] = ""

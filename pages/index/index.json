@@ -1,7 +1,7 @@
 {
-  "navigationBarBackgroundColor": "#0387FE",
+  "navigationBarBackgroundColor": "#fff",
   "enablePullDownRefresh": true,
-  "navigationBarTextStyle": "white",
+  "navigationBarTextStyle": "black",
   "usingComponents": {
     "wxc-icon": "../../dist/packages/@minui/wxc-icon/dist/index",
     "wxc-elip": "../../dist/packages/@minui/wxc-elip/dist/index",

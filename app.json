@@ -10,6 +10,7 @@
     "pages/my/vip/vip",
     "pages/my/coupon/coupon",
     "pages/my/location/location",
+    "pages/my/feedback/feedback",
     "pages/selCoupon/selCoupon",
     "pages/index/index",
     "pages/class/class",
@@ -35,7 +36,7 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "SNU CHIC",
     "navigationBarTextStyle": "black",
-    "backgroundColor": "#0387FE"
+    "backgroundColor": "#fff"
   },
   "tabBar": {
     "selectedColor": "#0387FE",

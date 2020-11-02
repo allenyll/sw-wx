@@ -1,5 +1,5 @@
 <view class="container">
-  <view wx:if="{{notices.length > 0}}" class="notice" style='background: -webkit-linear-gradient(top, rgba(3,135,254, 1), rgba(3,135,254, 0.7));'>
+  <view wx:if="{{notices.length > 0}}" class="notice" style='background: white;'>
 
     <wxc-icon size='40' type="{{'notice'}}" style='margin-right:10rpx;'> </wxc-icon>
     <wxc-elip style='width: 150rpx; color:red;text-align: center;'>SNU快报</wxc-elip>

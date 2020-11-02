@@ -102,7 +102,7 @@
   overflow: hidden;
   background: #fff;
   color: #333;
-  margin-top: 20rpx;
+  margin-top: 10rpx;
   padding-bottom: 20rpx;
 }
 
@@ -111,7 +111,7 @@
   flex-flow: row nowrap;
   align-items: center;
   justify-content: center;
-  height: 130rpx;
+  height: 80rpx;
 }
 
 .a-section .h .txt {
