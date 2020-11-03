@@ -293,6 +293,32 @@ Page({
     }
   },
 
+   /**
+   * 意见反馈点击事件
+   */
+  clickAboutus: function(){
+    wx.navigateTo({
+      url: '/pages/my/aboutus/aboutus'
+    })
+  },
+
+  /**
+   * 意见反馈点击事件
+   */
+  clickFeedback: function(event){
+    var that = this;
+    var type = event.currentTarget.dataset.type
+    if (that.data.hasUserInfo == false || app.globalData.userInfo == null) {
+      wx.navigateTo({
+        url: '/pages/login/login?mark=/pages/my/feedback/feedback',
+      })
+    }else{
+      wx.navigateTo({
+        url: '/pages/my/feedback/feedback?id=' + escape(app.globalData.userInfo.id) + '&type='+type,
+      })
+    }
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -1,0 +1,20 @@
+page{
+  background: #f4f4f4;
+  min-height: 100%;
+}
+
+.container{
+  background: #f4f4f4;
+  min-height: 100%;
+}
+
+.type-img{
+  width: 100%;
+  display: inline-block;
+  overflow: hidden;
+  height: 375rpx; /*562.5rpx;*/
+  border-radius: 15rpx;
+  background-color: #fff;
+  box-shadow: 0 10rpx 15rpx rgba(0, 0, 0, 0.1);
+  position: relative;
+}

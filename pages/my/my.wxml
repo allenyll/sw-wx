@@ -132,7 +132,7 @@
     <view class="item">
       <navigator url="" hover-class="none" class="a">
         <wxc-icon type="rate" size="34" color="{{iconColor}}" style="margin:15rpx 0 10rpx 0;"></wxc-icon>
-        <text class="txt" style="color:lightgray;text-decoration: line-through;">积分兑换</text>
+        <text class="txt" style="color:lightgray;text-decoration: line-through;">我的收藏</text>
       </navigator>
     </view>
     <view class="item no-border-right">
@@ -143,22 +143,22 @@
     </view>
 
     <view class="item item-bottom" bindtap="makePhoneCall">
-      <navigator url="" hover-class="none" class="a">
-        <wxc-icon type="group" size="34" color="{{iconColor}}" style="margin:15rpx 0 10rpx 0;"></wxc-icon>
-        <text class="txt" style="color:lightgray;text-decoration: line-through;">联系客服</text>
-      </navigator>
+      <view hover-class="none" class="a">
+        <wxc-icon type="group" size="34" color="{{iconColor}}" style="margin:28rpx 0 -6rpx 0;"></wxc-icon>
+        <button plain='true' open-type="contact" bindcontact="handleContact" style="border: none;font-size: 22rpx;">联系我们</button>
+      </view>
     </view>
     <view class="item item-bottom" bindtap="aboutUs">
-      <navigator url="url" hover-class="none" class="a">
+      <view bindtap="clickAboutus" hover-class="none" class="a">
         <wxc-icon type="help" size="34" color="{{iconColor}}" style="margin:15rpx 0 10rpx 0;"></wxc-icon>
         <text class="txt" style="color:lightgray;text-decoration: line-through;">关于我们</text>
-      </navigator>
+      </view>
     </view>
     <view class="item no-border-bottom">
-      <navigator url="/pages/my/feedback/feedback" hover-class="none" class="a">
+      <view bindtap="clickFeedback" hover-class="none" class="a">
         <wxc-icon type="comment" size="34" color="{{iconColor}}" style="margin:15rpx 0 10rpx 0;"></wxc-icon>
         <text class="txt">意见反馈</text>
-      </navigator>
+      </view>
     </view>
 
   </view>

@@ -1,4 +1,5 @@
-
+const http = require('../../../utils/http.js')  // 引入
+const dialog = require('../../../utils/dialog.js')  // 引入
 var app = getApp();
 
 Page({
@@ -42,7 +43,33 @@ Page({
     })
   },
   submitFeed: function() {
-    console.log(this.data)
+    var that = this
+    if(!that.data.type) {
+      dialog.dialog('提示', '请选择反馈类型!', false, '确定')
+      return
+    }
+    if (that.data.contentLen === 0) {
+      dialog.dialog('提示', '请输入反馈内容!', false, '确定')
+      return
+    }
+    if(!that.data.inputTxt) {
+      dialog.dialog('提示', '请填写联系方式，方便我们与您联系!', false, '确定')
+      return
+    }
+    let param = {
+      type: that.data.type,
+      content: that.data.content,
+      phone: that.data.inputTxt
+    }
+    http('/api-web/feedback/saveFeedback', param, '', 'post').then(res => {
+      if (res.success) {
+        dialog.showToast('提交成功', 'success', '', 2000)
+        wx.navigateBack({})
+      } else {
+        dialog.dialog('错误', '提交出现错误，请稍后再试，抱歉!', false, '确定')
+        return
+      }
+    })
   },
   onLoad: function (options) {
   },
