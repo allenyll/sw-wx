@@ -222,16 +222,17 @@ Page({
   },
 
   clickCash: function() {
-    var that = this;
-    if (that.data.hasUserInfo == false || app.globalData.userInfo == null) {
-      wx.navigateTo({
-        url: '/pages/login/login?mark=/pages/my/cash/cash',
-      })
-    } else {
-      wx.navigateTo({
-        url: '/pages/my/cash/cash?id=' + escape(app.globalData.userInfo.id),
-      })
-    }
+    // var that = this;
+    // if (that.data.hasUserInfo == false || app.globalData.userInfo == null) {
+    //   wx.navigateTo({
+    //     url: '/pages/login/login?mark=/pages/my/cash/cash',
+    //   })
+    // } else {
+    //   wx.navigateTo({
+    //     url: '/pages/my/cash/cash?id=' + escape(app.globalData.userInfo.id),
+    //   })
+    // }
+    dialog.dialog('提示', '功能正在开发中，请耐心等待', false, '确定')
   },
 
   clickVip: function() {
@@ -241,6 +242,10 @@ Page({
       fail: function (res) { },
       complete: function (res) { },
     })
+  },
+
+  clickWithdraw: function() {
+    dialog.dialog('提示', '功能正在开发中，请耐心等待', false, '确定')
   },
 
   /**
@@ -318,6 +323,27 @@ Page({
       })
     }
   },
+
+  clickPointExchange: function(event) {
+    dialog.dialog('提示', '功能正在开发中，请耐心等待', false, '确定')
+  },
+
+  /**
+   * 足迹点击事件
+   */
+  clickFootprint: function(event){
+    var that = this;
+    var type = event.currentTarget.dataset.type
+    if (that.data.hasUserInfo == false || app.globalData.userInfo == null) {
+      wx.navigateTo({
+        url: '/pages/login/login?mark=/pages/my/footprint/footprint',
+      })
+    }else{
+      wx.navigateTo({
+        url: '/pages/my/footprint/footprint?id=' + escape(app.globalData.userInfo.id) + '&type='+type,
+      })
+    }
+  },  
 
   /**
    * 生命周期函数--监听页面初次渲染完成

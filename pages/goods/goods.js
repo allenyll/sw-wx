@@ -174,7 +174,8 @@ Page({
       }
     })
     this.getGoodsInfo();
-
+    // 记录商品浏览痕迹
+    this.saveFootprint();
     var that = this
     //  高度自适应
     wx.getSystemInfo({
@@ -225,6 +226,22 @@ Page({
   onUnload: function () {
     // 页面关闭
 
+  },
+  /**
+   * 商品浏览记录
+   */
+  saveFootprint: function() {
+    let that = this;
+    var param = {
+      customerId: app.globalData.userInfo.id,
+      goodsId: that.data.id,
+      type: '商品'
+    }
+    http('/api-web/footprint/saveFootprint', param, null, 'post').then(res => {
+      if (!res.success) {
+        console.log('浏览记录失败')
+      }
+    })
   },
   /**
    * 规格选择弹出框隐藏

@@ -300,7 +300,7 @@ view,image,text,navigator {
     width: 750rpx;
     height: auto;
     overflow: hidden;
-    padding: 0 31.25rpx 25rpx 31.25rpx;
+    padding: 0 31.25rpx 0rpx 20rpx;
     background: #fff;
 }
 

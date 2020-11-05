@@ -42,7 +42,7 @@
           </view>
         </view>
 
-        <view class="a-item">
+        <view class="a-item" bindtap="clickWithdraw">
           <wxc-icon type="after-sales" size="{{iconSize-10}}" color="#FF5777" style="margin:15rpx 0 10rpx 0;">
           </wxc-icon>
           <view class="my" style="color:lightgray;text-decoration: line-through;">
@@ -130,16 +130,16 @@
       </view>
     </view>
     <view class="item">
-      <navigator url="" hover-class="none" class="a">
+      <view bindtap="clickPointExchange" hover-class="none" class="a">
         <wxc-icon type="rate" size="34" color="{{iconColor}}" style="margin:15rpx 0 10rpx 0;"></wxc-icon>
-        <text class="txt" style="color:lightgray;text-decoration: line-through;">我的收藏</text>
-      </navigator>
+        <text class="txt" style="color:lightgray;text-decoration: line-through;">积分兑换</text>
+      </view>
     </view>
     <view class="item no-border-right">
-      <navigator url="/pages/target/index" hover-class="none" class="a">
-        <wxc-icon type="footprint" size="34" color="lightgray" style="margin:15rpx 0 10rpx 0;"></wxc-icon>
-        <text class="txt" style="color:lightgray;text-decoration: line-through;">足迹</text>
-      </navigator>
+      <view bindtap="clickFootprint" hover-class="none" class="a">
+        <wxc-icon type="footprint" size="34" color="{{iconColor}}" style="margin:15rpx 0 10rpx 0;"></wxc-icon>
+        <text class="txt">足迹</text>
+      </view>
     </view>
 
     <view class="item item-bottom" bindtap="makePhoneCall">
@@ -151,7 +151,7 @@
     <view class="item item-bottom" bindtap="aboutUs">
       <view bindtap="clickAboutus" hover-class="none" class="a">
         <wxc-icon type="help" size="34" color="{{iconColor}}" style="margin:15rpx 0 10rpx 0;"></wxc-icon>
-        <text class="txt" style="color:lightgray;text-decoration: line-through;">关于我们</text>
+        <text class="txt">关于我们</text>
       </view>
     </view>
     <view class="item no-border-bottom">
