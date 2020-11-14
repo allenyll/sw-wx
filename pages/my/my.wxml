@@ -92,7 +92,7 @@
         </view>
       </view>
       <view class="item">
-        <view bindtap="clickOrder" data-type="SW0705" hover-class="none" class="btn">
+        <view bindtap="clickOrder" data-type="SW0801" hover-class="none" class="btn">
           <van-icon name="after-sale" info="" size="20px" style="margin:15rpx 0 10rpx 0;"/>
           <text class="txt">退款/售后</text>
         </view>

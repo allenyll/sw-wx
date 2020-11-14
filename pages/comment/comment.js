@@ -46,7 +46,7 @@ Page({
         })
         if (that.data.goodsList.length > 1){
           that.setData({
-            showRate: false
+            showRate: true
           })
         }
       }

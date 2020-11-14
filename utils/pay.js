@@ -64,7 +64,7 @@ function wxpay(app, money, orderId, redirectUrl, type) {
                       if (_res.code == '100000') {
                         if (redirectUrl != '') {
                           wx.redirectTo({
-                            url: redirectUrl + '?id='+ escape(app.globalData.userInfo.id)
+                            url: redirectUrl + '?id='+ escape(app.globalData.userInfo.id) + '&type=SW0700'
                           });
                         }
                       }
@@ -110,7 +110,7 @@ function wxpay(app, money, orderId, redirectUrl, type) {
                     }
                     http('/api-web/pay/updateStatus', _param, '', 'post').then(res => {
                       wx.redirectTo({
-                        url: redirectUrl + '?id='+ escape(app.globalData.userInfo.id)
+                        url: redirectUrl + '?id='+ escape(app.globalData.userInfo.id) + '&type=SW0700'
                       });
                     })
                   }

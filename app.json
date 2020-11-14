@@ -2,6 +2,9 @@
   "pages": [
     "pages/my/my",
     "pages/my/order-list/order",
+    "pages/my/order-refund/orderRefund",
+    "pages/my/order-refund-type/orderRefundType",
+    "pages/my/order-refund-detail/orderRefundDetail",
     "pages/my/account/account",
     "pages/my/point/point",
     "pages/my/cash/cash",

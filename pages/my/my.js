@@ -222,17 +222,17 @@ Page({
   },
 
   clickCash: function() {
-    // var that = this;
-    // if (that.data.hasUserInfo == false || app.globalData.userInfo == null) {
-    //   wx.navigateTo({
-    //     url: '/pages/login/login?mark=/pages/my/cash/cash',
-    //   })
-    // } else {
-    //   wx.navigateTo({
-    //     url: '/pages/my/cash/cash?id=' + escape(app.globalData.userInfo.id),
-    //   })
-    // }
-    dialog.dialog('提示', '功能正在开发中，请耐心等待', false, '确定')
+    var that = this;
+    if (that.data.hasUserInfo == false || app.globalData.userInfo == null) {
+      wx.navigateTo({
+        url: '/pages/login/login?mark=/pages/my/cash/cash',
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/my/cash/cash?id=' + escape(app.globalData.userInfo.id),
+      })
+    }
+    //dialog.dialog('提示', '功能正在开发中，请耐心等待', false, '确定')
   },
 
   clickVip: function() {
@@ -259,8 +259,12 @@ Page({
         url: '/pages/login/login?mark=/pages/my/order-list/order',
       })
     }else{
+      var url = '/pages/my/order-list/order?id=' + escape(app.globalData.userInfo.id) + '&type='+type
+      if ('SW0801' === type) {
+        url = '/pages/my/order-refund/orderRefund?id=' + escape(app.globalData.userInfo.id) + '&type='+type
+      }
       wx.navigateTo({
-        url: '/pages/my/order-list/order?id=' + escape(app.globalData.userInfo.id) + '&type='+type,
+        url: url,
       })
     }
   },
