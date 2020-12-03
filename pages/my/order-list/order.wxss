@@ -129,6 +129,23 @@
   color: #e64340;
 }
 
+.an-order-hd{
+  width: 92%;
+  height: 60rpx;
+  line-height: 60rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  font-size: 28rpx;
+  border-bottom: 1px solid #eee;
+}
+
+.an-order-hd .an-order-icon{
+  float: left;
+  font-size: 36rpx;
+  height: 60rpx;
+  line-height: 70rpx;
+}
+
 .a-order  .goods-info, .goods-img-container {
   width: 675rpx;
   margin-left: 30rpx;
@@ -147,7 +164,7 @@
   background-color: #f7f7f7;
 }
 
-.goods-info .img-box .goods-img, .goods-img-container .img-box .goods-img {
+.goods-img {
   width: 120rpx;
   height: 120rpx;
 }
@@ -188,7 +205,27 @@
   white-space: nowrap;
 }
 
-.goods-img-container .img-box {
+.goods-container {
+  padding: 6rpx 30rpx 0 30rpx;
+}
+
+.goods-box {
+  display: flex;
+}
+
+.goods-name {
+  font-size: 24rpx;
+  margin-left: 14rpx;
+  width: 74%;
+  height: 50%;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  padding-top: 30rpx;
+}
+
+.img-box {
   width: 120rpx;
   height: 120rpx;
   overflow: hidden;
@@ -198,7 +235,7 @@
   border-radius: 10rpx;
 }
 
-.goods-img-container .goods-count{
+.goods-count{
   font-size:10px;
   color:gray;
   text-align:right;

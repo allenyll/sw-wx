@@ -3,6 +3,7 @@
   "navigationBarBackgroundColor": "#fff",
   "navigationBarTextStyle": "black",
   "usingComponents": {
+    "navbar": "../../..//templates/navbar/index",
     "wxc-abnor": "../../../dist/packages/@minui/wxc-abnor/dist/index",
     "wxc-loading": "../../../dist/packages/@minui/wxc-loading/dist/index",
     "wxc-badge": "../../../dist/packages/@minui/wxc-badge/dist/index",
@@ -14,6 +15,7 @@
     "van-radio-group": "../../../dist/packages/vant-weapp/radio-group/index",
     "van-cell": "../../../dist/packages/vant-weapp/cell/index",
     "van-cell-group": "../../../dist/packages/vant-weapp/cell-group/index",
+    "van-icon": "../../../dist/packages/vant-weapp/icon/index",
     "van-button-plus": "../../../dist/packages/vant-weapp/button/index"
   }
 }

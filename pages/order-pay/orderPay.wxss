@@ -74,6 +74,7 @@ form {
   overflow: hidden;
   margin-right: 20rpx;
   background-color: #d8d8d8;
+  border-radius: 14rpx;
 }
 
 .goods-list .img-box .img {
@@ -100,6 +101,9 @@ form {
   color: #000;
   line-height: 1.6;
   overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .a-goods .text-box .arow01 {

@@ -1,5 +1,4 @@
-<view class="stv-container">
-
+<view class="stv-container" style="top: {{navHeight}}px">
   <view class="tab-bar">
     <view wx:for="{{tabs}}" wx:key="unique" data-index="{{index}}" bindtap="handlerTabTap" class="tab {{activeTab==index?'active':''}}" style="width: {{stv.windowWidth/tabs.length}}px">
       {{item}}
@@ -36,6 +35,10 @@
               </view>
               <view wx:else class="order-list">
                 <view class="a-order" wx:for-items="{{item.orderList}}" wx:key="index">
+                  <view class="an-order-hd">
+                    <view class="an-order-icon"><van-icon name="shop-o" /></view>
+                    <text style="margin-left: 10rpx; font-size: 12px;">SNU CHIC</text>
+                  </view>
                   <view class="order-date">
                     <view class="date-box">下单时间：{{item.orderTime}}</view>
                     <view wx:if="{{item.orderStatus == 'SW0701'}}" class="status red">待付款</view>
@@ -61,9 +64,20 @@
                       <view style='padding-top:15rpx;' wx:if="{{item.orderRemark && item.orderRemark != ''}}">备注： {{item.orderRemark}}</view>
                     </view>
                   </view> -->
-                  <view bindtap="clickOrderDetail" data-id="{{item.id}}">
+                  <view wx:if="{{item.orderDetails.length == 1}}" bindtap="clickOrderDetail" data-id="{{item.id}}">
+                    <view class="goods-container">
+                      <view class="goods-box" wx:for="{{item.orderDetails}}" wx:key="index" wx:for-item="goodsItem">
+                        <view class="img-box">
+                          <image src="{{goodsItem.pic}}" class="goods-img"></image>
+                        </view>
+                        <view class="goods-name">{{goodsItem.goodsName}}</view>
+                      </view>
+                      <view class="goods-count">共{{item.goodsCount}}件商品</view>
+                    </view>
+                  </view>
+                  <view wx:if="{{item.orderDetails.length > 1}}" bindtap="clickOrderDetail" data-id="{{item.id}}">
                     <scroll-view class="goods-img-container" scroll-x="true">
-                      <view class="img-box" wx:for-items="{{item.orderDetails}}" wx:key="index" wx:for-item="goodsItem">
+                      <view class="img-box" wx:for="{{item.orderDetails}}" wx:key="index" wx:for-item="goodsItem">
                         <image src="{{goodsItem.pic}}" class="goods-img"></image>
                       </view>
                       <view class="goods-count">共{{item.goodsCount}}件商品</view>
