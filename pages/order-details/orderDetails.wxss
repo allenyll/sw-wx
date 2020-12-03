@@ -152,6 +152,7 @@ page{
     overflow: hidden;
     margin-right: 20rpx;
     background-color: #d8d8d8;
+    border-radius: 20rpx;
 }
 
 .goods-list .img-box .img{

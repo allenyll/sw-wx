@@ -195,8 +195,14 @@ Page({
   setAccount: function(){
     var that = this;
     if (that.data.hasUserInfo == false || app.globalData.userInfo == null) {
+      var url = '/pages/my/account/account'
+      var query = {
+        url: url,
+        type: '',
+        page: 'account'
+      }
       wx.navigateTo({
-        url: '/pages/login/login?mark=/pages/my/account/account',
+        url: '/pages/login/login?param=' + JSON.stringify(query),
       })
     } else {
       wx.navigateTo({
@@ -211,8 +217,14 @@ Page({
   clickPoint: function() {
     var that = this;
     if (that.data.hasUserInfo == false || app.globalData.userInfo == null) {
+      var url = '/pages/my/point/point'
+      var query = {
+        url: url,
+        type: '',
+        page: 'point'
+      }
       wx.navigateTo({
-        url: '/pages/login/login?mark=/pages/my/point/point',
+        url: '/pages/login/login?param=' + JSON.stringify(query),
       })
     } else {
       wx.navigateTo({
@@ -222,17 +234,17 @@ Page({
   },
 
   clickCash: function() {
-    var that = this;
-    if (that.data.hasUserInfo == false || app.globalData.userInfo == null) {
-      wx.navigateTo({
-        url: '/pages/login/login?mark=/pages/my/cash/cash',
-      })
-    } else {
-      wx.navigateTo({
-        url: '/pages/my/cash/cash?id=' + escape(app.globalData.userInfo.id),
-      })
-    }
-    //dialog.dialog('提示', '功能正在开发中，请耐心等待', false, '确定')
+    // var that = this;
+    // if (that.data.hasUserInfo == false || app.globalData.userInfo == null) {
+    //   wx.navigateTo({
+    //     url: '/pages/login/login?mark=/pages/my/cash/cash',
+    //   })
+    // } else {
+    //   wx.navigateTo({
+    //     url: '/pages/my/cash/cash?id=' + escape(app.globalData.userInfo.id),
+    //   })
+    // }
+    dialog.dialog('提示', '功能正在开发中，请耐心等待', false, '确定')
   },
 
   clickVip: function() {
@@ -255,8 +267,17 @@ Page({
     var that = this;
     var type = event.currentTarget.dataset.type
     if (that.data.hasUserInfo == false || app.globalData.userInfo == null) {
+      var url = '/pages/my/order-list/order'
+      if ('SW0801' === type) {
+        url = '/pages/my/order-refund/orderRefund'
+      }
+      var query = {
+        url: url,
+        type: type,
+        page: 'order'
+      }
       wx.navigateTo({
-        url: '/pages/login/login?mark=/pages/my/order-list/order',
+        url: '/pages/login/login?param=' + JSON.stringify(query),
       })
     }else{
       var url = '/pages/my/order-list/order?id=' + escape(app.globalData.userInfo.id) + '&type='+type
@@ -275,8 +296,14 @@ Page({
   clickAddress: function () {
     var that = this;
     if (that.data.hasUserInfo == false || app.globalData.userInfo == null) {
+      var url = '/pages/address/address'
+      var query = {
+        url: url,
+        type: '',
+        page: 'address'
+      }
       wx.navigateTo({
-        url: '/pages/login/login?mark=/pages/address/address',
+        url: '/pages/login/login?param=' + JSON.stringify(query),
       })
     } else {
       wx.navigateTo({
@@ -292,8 +319,14 @@ Page({
     var that = this;
     console.log(app.globalData.userInfo)
     if (that.data.hasUserInfo == false || app.globalData.userInfo == null) {
+      var url = '/pages/my/coupon/coupon'
+      var query = {
+        url: url,
+        type: '',
+        page: 'coupon'
+      }
       wx.navigateTo({
-        url: '/pages/login/login?mark=/pages/my/coupon/coupon',
+        url: '/pages/login/login?param=' + JSON.stringify(query),
       })
     } else {
       wx.navigateTo({
@@ -318,8 +351,14 @@ Page({
     var that = this;
     var type = event.currentTarget.dataset.type
     if (that.data.hasUserInfo == false || app.globalData.userInfo == null) {
+      var url = '/pages/my/feedback/feedback'
+      var query = {
+        url: url,
+        type: '',
+        page: 'feedback'
+      }
       wx.navigateTo({
-        url: '/pages/login/login?mark=/pages/my/feedback/feedback',
+        url: '/pages/login/login?param=' + JSON.stringify(query),
       })
     }else{
       wx.navigateTo({
@@ -339,8 +378,14 @@ Page({
     var that = this;
     var type = event.currentTarget.dataset.type
     if (that.data.hasUserInfo == false || app.globalData.userInfo == null) {
+      var url = '/pages/my/footprint/footprint'
+      var query = {
+        url: url,
+        type: '',
+        page: 'footprint'
+      }
       wx.navigateTo({
-        url: '/pages/login/login?mark=/pages/my/footprint/footprint',
+        url: '/pages/login/login?param=' + JSON.stringify(query),
       })
     }else{
       wx.navigateTo({

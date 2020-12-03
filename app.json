@@ -5,6 +5,8 @@
     "pages/my/order-refund/orderRefund",
     "pages/my/order-refund-type/orderRefundType",
     "pages/my/order-refund-detail/orderRefundDetail",
+    "pages/my/order-refund-delivery/orderRefundDelivery",
+    "pages/my/order-refund-check/orderRefundCheck",
     "pages/my/account/account",
     "pages/my/point/point",
     "pages/my/cash/cash",

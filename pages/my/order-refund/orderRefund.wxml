@@ -3,11 +3,10 @@
   <view class="tab-bar">
     <view wx:for="{{tabs}}" wx:key="unique" data-index="{{index}}" bindtap="handlerTabTap" class="tab {{activeTab==index?'active':''}}" style="width: {{stv.windowWidth/tabs.length}}px">
       {{item}}
-      <wxc-badge wx:if="{{orderList[index].orderList.length>0 && item != '申请售后'}}" class="message__badge {{activeTab==index?'active':''}}">{{orderList[index].orderList.length}}</wxc-badge>
+      <wxc-badge wx:if="{{orderList[index].orderServiceList.length>0 && item != '申请售后' && item != '申请记录'}}" class="message__badge {{activeTab==index?'active':''}}">{{orderList[index].orderServiceList.length}}</wxc-badge>
     </view>
     <view style="width: {{stv.lineWidth}}px; left: {{stv.offset/tabs.length}}px" class="under-line {{!stv.tStart? 'withAnimate': ''}}"></view>
   </view>
-
 
   <view class="scroll-view">
     <wxc-loading is-show="{{loadingStatus}}" type="mgj"></wxc-loading>
@@ -27,71 +26,161 @@
       </view>
 
       <view wx:else>
-        <view wx:for-items="{{orderList}}" wx:key="id">
+        <view wx:for="{{orderList}}" wx:key="id" wx:for-item="item">
           <swiper-item style="overflow: visible;border-radius: 50%;" class="one-scene">
             <scroll-view style="height:100%" scroll-y>
               <view wx:if="{{item.isnull}}" class="no-order">
                 <wxc-abnor type="ORDER" title='您还没有相关订单~'></wxc-abnor>
               </view>
               <view wx:else class="order-list">
-                <!-- <view class="a-order" wx:for-items="{{item.orderList}}" wx:key="index">
-                  <view class="order-date">
-                    <view class="date-box">下单时间：{{item.orderTime}}</view>
-                    <view wx:if="{{item.orderStatus == 'SW0701'}}" class="status red">待付款</view>
-                    <view wx:elif="{{item.orderStatus == 'SW0702'}}" class="status red">待发货</view>
-                    <view wx:elif="{{ item.orderStatus == 'SW0703'}}" class="status red">待收货</view>
-                    <view wx:elif="{{item.orderStatus == 'SW0704'}}" class="status red">待评价</view>
-                    <view wx:elif="{{item.orderStatus == 'SW0705' || item.orderStatus == 'SW0706'}}" class="status">已完成</view>
-                    <view wx:elif="{{item.orderStatus == 'SW0707'}}" class="status">已取消</view>
-                    <view wx:elif="{{item.orderStatus == 'SW0708'}}" class="status">已关闭</view>
-                    <view wx:else="{{item.orderStatus == 'SW0709'}}" class="status">已失效</view>
-                  </view>
-                  <view bindtap="clickOrderDetail" data-id="{{item.id}}">
-                    <scroll-view class="goods-img-container" scroll-x="true">
-                      <view class="img-box" wx:for-items="{{item.orderDetails}}" wx:key="index" wx:for-item="goodsItem">
-                        <image src="{{goodsItem.pic}}" class="goods-img"></image>
-                      </view>
-                      <view class="goods-count">共{{item.goodsCount}}件商品</view>
-                    </scroll-view>
-                  </view>
-                  <view class="price-box">
-                    <view class="total-price">合计：¥ {{item.totalAmount}}</view>
-                    <
-                    <view style='display: flex; flex-direction:row; justify-content: space-between;'>
-                      <view hidden="{{item.orderStatus == 'SW0701'? fslse : true}}" style="float:right ;margin-left:10rpx;">
-                      <van-button type="default" size="small" bindtap="getCancelReason" data-id="{{item.id}}" >取消订单</van-button>
-                      </view>
-                      <view hidden="{{item.orderStatus == 'SW0701'? fslse : true}}" style="float:right ;margin-left:10rpx;">
-                      <van-button type="warning" size="small" bindtap="toPayTap" data-id="{{item.id}}" data-money="{{item.totalAmount}}"  data-score="{{item.integration}}">立即支付</van-button>
-                      </view>
-                      <view hidden="{{item.orderStatus == 'SW0703'? fslse : true}}" style="float:right ;margin-left:10rpx;">
-                      <van-button type="primary" size="small" bindtap="receiveOrderTap" data-id="{{item.id}}" >确认收货</van-button>
-                      </view>
-                      <view  hidden="{{item.orderStatus == 'SW0704'? fslse : true}}" style="float:right ;margin-left:10rpx;">
-                      <van-button type="info" size="small"bindtap="appraiseOrderTap" data-id="{{item.id}}" >立即评价</van-button>
-                      </view>
-                      <view hidden="{{item.orderStatus == 'SW0707'? fslse : true}}" style="float:right ;margin-left:10rpx;">
-                      <van-button type="danger" size="small" bindtap="deleteTap" data-id="{{item.id}}" >删除订单</van-button>
-                      </view>
-                    </view>
-                  </view>
-                </view> -->
-                <view class="an-order" wx:for="{{item.orderServiceList}}" wx:for-item="items">
+                <view wx:if="{{!item.isOrder}}" class="a-order" wx:for="{{item.orderServiceList}}" wx:for-item="items" data-isOrder="{{item.isOrder}}" wx:key="index">
                   <view class="an-order-hd">
                     <view class="an-order-icon"><van-icon name="shop-o" /></view>
                     <text style="margin-left: 10rpx; font-size: 24rpx;">SNU CHIC</text>
                   </view>
-                  <view class="order-detail" wx:for="{{items.orderDetails}}" wx:for-item="itemDetail">
+                  <view class="order-date">
+                    <view class="date-box">服务单号：{{items.aftersaleNo}}</view>
+                    <view wx:if="{{items.aftersaleType == 'SW2901'}}"  class="iconfont icon-refund" style='display:inline; font-size: 25rpx; color: red;'><text style="color: black; font-size: 28rpx; margin-left: 10rpx;">退款</text></view>
+                    <view wx:elif="{{items.aftersaleType == 'SW2902'}}" class="iconfont icon-huan" style='display:inline; font-size: 25rpx; color: red;'><text style="color: black; font-size: 28rpx; margin-left: 10rpx;">换货</text></view>
+                    <view wx:elif="{{items.aftersaleType == 'SW2903'}}" class="iconfont icon-tuihuoguanli" style='display:inline; font-size: 25rpx; color: red;'><text style="color: black; font-size: 28rpx; margin-left: 10rpx;">退款退货</text></view>
+                    <!-- <view wx:if="{{items.aftersaleStatus == 'SW0801'}}" class="status red">未申请售后</view>
+                    <view wx:elif="{{items.aftersaleStatus == 'SW0802'}}" class="status red">申请售后</view>
+                    <view wx:elif="{{items.aftersaleStatus == 'SW0803'}}" class="status red">取消售后</view>
+                    <view wx:elif="{{items.aftersaleStatus == 'SW0804'}}" class="status red">售后处理中</view>
+                    <view wx:elif="{{items.aftersaleStatus == 'SW0805'}}" class="status">拒绝售后</view>
+                    <view wx:elif="{{items.aftersaleStatus == 'SW0806'}}" class="status">处理完成</view> -->
+                  </view>
+                  <view bindtap="clickOrderSaleDetail" data-id="{{items.id}}" data-no="{{items.aftersaleNo}}" data-time="{{items.applyTime}}" data-pic="{{items.goodsFile}}" data-name="{{items.goodsName}}" data-num="{{items.refundQuality}}" data-attr="{{items.attributes}}" data-status="{{items.aftersaleStatus}}" data-note="{{items.dealNote}}" data-deliveryTime="{{items.deliveryTime}}" data-deliveryNo="{{items.deliveryNo}}">
+                    <view class="goods-item">
+                      <view class="a-goods">
+                        <view class="img-box">
+                          <image src="{{items.goodsFile}}" class="img" />
+                        </view>
+                        <view class="text-box">
+                          <view class="arow arow01">
+                            <view class="goods-name">{{items.goodsName}}</view>
+                          </view>
+                          <view class="arow">
+                            <view class="goods-label">商品属性：{{items.attributes}}</view>
+                          </view>
+                          <view class="arow" style="position: absolute; bottom: 10rpx;">
+                            <view class="goods-label-item">申请数量：{{items.refundQuality}}</view>
+                          </view>
+                        </view>
+                      </view>
+                    </view>
+                    <view wx:if="{{items.aftersaleStatus == 'SW0802'}}" class="service-det">
+                      <view class="service-status">等待处理</view>
+                      <view class="service-des">售后申请单已提交，请耐心的等待平台审核处理，如有需要请联系客服！</view>
+                      <view class="iconfont icon-youjiantou1" style='color:#999;line-height: 80rpx;font-size: 22rpx;margin-right: 20rpx;margin-left: 15rpx;'></view>
+                    </view>
+                    <view wx:elif="{{items.aftersaleStatus == 'SW0803'}}" class="service-det">
+                      <view class="service-status">申请单取消</view>
+                      <view class="service-des">售后申请单已取消，如有需要可以在申请页面重新提交售后申请单！</view>
+                      <view class="iconfont icon-youjiantou1" style='color:#999;line-height: 80rpx;font-size: 22rpx;margin-right: 20rpx;margin-left: 15rpx;'></view>
+                    </view>
+                    <view wx:elif="{{items.aftersaleStatus == 'SW0804' && (items.deliveryTime == '' || items.deliveryTime == null)}}" class="service-det">
+                      <view class="service-status">请您发货</view>
+                      <view class="service-des">
+                        <view style="float: left;">请尽快发货并填写发货单，如未及时填写服务单将在<van-count-down time="{{items.unDeliveryTime}}" format="DD天HH时mm分ss秒" />后自动取消！</view>
+                      </view>
+                      <view class="iconfont icon-youjiantou1" style='color:#999;line-height: 80rpx;font-size: 22rpx;margin-right: 20rpx;margin-left: 15rpx;'></view>
+                    </view>
+                    <view wx:elif="{{items.aftersaleStatus == 'SW0804' && (items.deliveryTime != '' || items.deliveryTime != null)}}" class="service-det">
+                      <view class="service-status">已发货</view>
+                      <view class="service-des" style="line-height: 60rpx;">您已发货，快递单号为<text style="color:#0387FE; font-weight: 500;">{{items.deliveryNo}}</text></view>
+                      <view class="iconfont icon-youjiantou1" style='color:#999;line-height: 80rpx;font-size: 22rpx;margin-right: 20rpx;margin-left: 15rpx;'></view>
+                    </view>
+                    <view wx:elif="{{items.aftersaleStatus == 'SW0805'}}" class="service-det">
+                      <view class="service-status">拒绝申请</view>
+                      <view class="service-des">申请单已被拒绝，请点击进入详情页查看拒绝原因！</view>
+                      <view class="iconfont icon-youjiantou1" style='color:#999;line-height: 80rpx;font-size: 22rpx;margin-right: 20rpx;margin-left: 15rpx;'></view>
+                    </view>
+                    <view wx:elif="{{items.aftersaleStatus == 'SW0806'}}" class="service-det">
+                      <view class="service-status">处理完成</view>
+                      <view class="service-des" style="line-height: 60rpx;">服务已完成，感谢您对我们服务的支持！</view>
+                      <view class="iconfont icon-youjiantou1" style='color:#999;line-height: 80rpx;font-size: 22rpx;margin-right: 20rpx;margin-left: 15rpx;'></view>
+                    </view>
+                  </view>
+                  <view class="btn-box">
+                    <!-- <view class="total-price">合计：¥ {{items.refundAmount}}</view> -->
+                    <view style='width: 100%; flex-direction:row; justify-content: space-between;'>
+                      <view wx:if="{{items.aftersaleStatus == 'SW0804' && (items.deliveryTime == '' || items.deliveryTime == null)}}" style="float:right ;margin-left:10rpx;">
+                      <van-button type="danger" size="small" round bindtap="deliverOrder" data-id="{{items.id}}" data-no="{{items.aftersaleNo}}" data-time="{{items.applyTime}}" data-pic="{{items.goodsFile}}" data-name="{{items.goodsName}}" data-num="{{items.refundQuality}}" data-attr="{{items.attributes}}">填写发货单</van-button> 
+                      </view>
+                      <view hidden="{{!(items.aftersaleStatus == 'SW0802' || items.aftersaleStatus == 'SW0804')}}" style="float:right ;margin-left:10rpx;">
+                      <van-button type="default" size="small" round bindtap="cancelApply" data-id="{{items.id}}" data-orderId="{{items.orderId}}" data-orderDetailId="{{items.orderDetailId}}" >取消申请</van-button>
+                      </view>
+                      <view hidden="{{items.aftersaleStatus == 'SW0802' || items.aftersaleStatus == 'SW0804'}}" style="float:right ;margin-left:10rpx;">
+                      <van-button type="warning" size="small" round bindtap="deleteApply" data-id="{{items.id}}" data-orderId="{{items.orderId}}" data-orderDetailId="{{items.orderDetailId}}" >删除申请</van-button>
+                      </view>
+                    </view>
+                  </view>
+                </view>
+                <view wx:if="{{item.isOrder}}"class="an-order" wx:for="{{item.orderServiceList}}" wx:for-item="items">
+                  <view class="an-order-hd">
+                    <view class="an-order-icon"><van-icon name="shop-o" /></view>
+                    <text style="margin-left: 10rpx; font-size: 24rpx;">SNU CHIC</text>
+                  </view>
+                  <!-- <view class="order-detail" wx:for="{{items.orderDetails}}" wx:for-item="itemDetail">
                     <van-card
                       num="{{itemDetail.quantity}}"
                       desc="{{itemDetail.attributes}}"
                       title="{{itemDetail.goodsName}}"
                       thumb="{{itemDetail.pic}}"
                     >
-                      <view slot="footer">
-                        <van-button bindtap="toRefundPage" data-orderId="{{itemDetail.orderId}}" data-id="{{itemDetail.id}}" data-quantity="{{itemDetail.quantity}}" data-attributes="{{itemDetail.attributes}}" data-goodsName="{{itemDetail.goodsName}}" data-pic="{{itemDetail.pic}}" data-goodsPrice="{{itemDetail.goodsPrice}}"  plain size="small" type="danger">申请售后</van-button>
-                      </view>
+                    <view class="service-det">
+                      <view class="service-status">处理完成</view>
+                      <view class="service-des">服务已完成，感谢您对我们服务的支持！</view>
+                      <view class="iconfont icon-youjiantou1" style='color:#999;line-height: 80rpx;font-size: 22rpx;margin-right: 20rpx;margin-left: 15rpx;'></view>
+                    </view>
+                    <view slot="footer">
+                      <van-button bindtap="toRefundPage" data-orderId="{{itemDetail.orderId}}" data-id="{{itemDetail.id}}" data-quantity="{{itemDetail.quantity}}" data-attributes="{{itemDetail.attributes}}" data-goodsName="{{itemDetail.goodsName}}" data-pic="{{itemDetail.pic}}" data-goodsPrice="{{itemDetail.goodsPrice}}"  plain size="small" round type="danger">申请售后</van-button>
+                    </view>
                     </van-card>
+                  </view> -->
+                  <view wx:for="{{items.orderDetails}}" wx:for-item="itemDetail">
+                    <view class="goods-item">
+                      <view class="a-goods">
+                        <view class="img-box">
+                          <image src="{{itemDetail.pic}}" class="img" />
+                        </view>
+                        <view class="text-box">
+                          <view class="arow arow01">
+                            <view class="goods-name">{{itemDetail.goodsName}}</view>
+                          </view>
+                          <view class="arow">
+                            <view class="goods-label">商品属性：{{itemDetail.attributes}}</view>
+                          </view>
+                          <view class="arow" style="position: absolute; bottom: 10rpx;">
+                            <view class="goods-label-item">购买数量：{{itemDetail.quantity}}</view>
+                          </view>
+                        </view>
+                      </view>
+                    </view>
+                    <!-- <view class="service-det">
+                      <view class="service-status">处理完成</view>
+                      <view class="service-des">服务已完成，感谢您对我们服务的支持！</view>
+                      <view class="iconfont icon-youjiantou1" style='color:#999;line-height: 80rpx;font-size: 22rpx;margin-right: 20rpx;margin-left: 15rpx;'></view>
+                    </view> -->
+                    <view class="btn-box">
+                      <view style='width: 100%; flex-direction:row; justify-content: space-between;'>
+                        <view bindtap="clickOrderSaleDetail" wx:if="{{itemDetail.status == 'SW0802' || itemDetail.status == 'SW0804' || itemDetail.status == 'SW0805' || itemDetail.status == 'SW0806'}}" class="deal-tip" data-id="{{itemDetail.orderAftersaleId}}">
+                          <view class="title">该商品已申请售后</view>
+                          <view class="iconfont icon-youjiantou1" style='color:#999;line-height: 80rpx;font-size: 20rpx;margin-right: 20rpx;margin-left: 8rpx;'></view>
+                        </view>
+                        <view wx:if="{{itemDetail.status == 'SW0801' && !items.canApply}}" class="deal-tip">
+                          <view class="title">该商品已超过售后期</view>
+                          <view class="iconfont icon-youjiantou1" style='color:#999;line-height: 80rpx;font-size: 20rpx;margin-right: 20rpx;margin-left: 8rpx;'></view>
+                        </view>
+                        <view wx:if="{{itemDetail.status == 'SW0801' && items.canApply}}" style="float:right ;margin-left:10rpx;">
+                          <van-button type="danger" size="small" round plain bindtap="toRefundPage" data-orderId="{{itemDetail.orderId}}" data-id="{{itemDetail.id}}" data-quantity="{{itemDetail.quantity}}" data-attributes="{{itemDetail.attributes}}" data-goodsName="{{itemDetail.goodsName}}" data-pic="{{itemDetail.pic}}" data-goodsPrice="{{itemDetail.goodsPrice}}" >申请售后</van-button>
+                        </view>
+                        <view wx:if="{{itemDetail.status == 'SW0801' && !items.canApply}}" style="float:right ;margin-left:10rpx;">
+                          <van-button class="van-btn" type="default" size="small" round plain bindtap="canNotApply" >申请售后</van-button>
+                        </view>
+                      </view>
+                    </view>
                   </view>
                 </view>
               </view>

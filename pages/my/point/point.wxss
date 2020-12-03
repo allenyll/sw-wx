@@ -116,13 +116,13 @@
 #myIntegral .message-item .message-title {
   width: calc(100% - 110px);
   padding: 15px 0 0 15px;
-  font-size: 16px;
+  font-size: 13px;
   overflow: hidden;
 }
 #myIntegral .message-item .message-time {
   margin: 10px 0 12px 15px;
   color: #d6d6d6;
-  font-size: 12px;
+  font-size: 10px;
 }
 #myIntegral .message-item .message-num {
   position: absolute;

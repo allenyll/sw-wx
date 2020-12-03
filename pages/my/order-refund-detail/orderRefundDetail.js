@@ -1,6 +1,5 @@
 const http = require('../../../utils/http.js')  // 引入
 const dialog = require('../../../utils/dialog.js')  // 引入
-var wxpay = require('../../../utils/pay.js')
 var app = getApp()
 Page({
   data: {
@@ -8,7 +7,11 @@ Page({
     },
     pageType: '',
     tempFilePaths: [],
+    fileId: '',
+    refundPoint: 0,
     applyNum: 1,
+    usePointAmount: 0,
+    getPointAmount: 0,
     refundAmount: 0,
     refundAmountStr: '￥' + 0,
     order: {},
@@ -16,6 +19,7 @@ Page({
     isEnabled: false,
     remark: '',
     contentLen: 0,
+    uploadFlag: false,
     reason: '请选择',
     reasonShow: false,
     reasonList: [
@@ -70,10 +74,10 @@ Page({
     backTypeDic: '',
     backTypeShow: false,
     backTypeList: [
-      {
-        id: 'SW3101',
-        reason: '上门取件'
-      },
+      // {
+      //   id: 'SW3101',
+      //   reason: '上门取件'
+      // },
       {
         id: 'SW3102',
         reason: '送至门店'
@@ -86,6 +90,7 @@ Page({
   },
 
   onLoad: function (options) {
+    console.log('测试')
     var that = this
     var type = options.type
     if ("SW2901" === type) {
@@ -109,7 +114,10 @@ Page({
   },
 
   onShow: function () {
-    this.getOrderInfo()
+    console.log(this.data.uploadFlag)
+    if (!this.data.uploadFlag) {
+      this.getOrderInfo()
+    }
   },
 
   getOrderInfo: function() {
@@ -144,7 +152,12 @@ Page({
 
   // 添加图片
   addImage() {
-    let paths = this.data.tempFilePaths;
+    let that = this
+    that.setData({
+      uploadFlag: true
+    })
+    let paths = this.data.tempFilePaths
+    let fileId = this.data.fileId
     if (paths.length == 3) {
       dialog.showToast('最多只能上传3张图片', null, '', 2000)
       return
@@ -156,16 +169,51 @@ Page({
       success: res => {
         let path = res.tempFilePaths
         console.log(path)
-        path.forEach((item, index) => {
-          if (paths.length < 3) {
-            paths.push(item)
-          }
+        wx.showToast({
+          title: '正在上传...',
+          icon: 'loading',
+          mask: true,
+          duration: 10000
         })
-        this.setData({
-          tempFilePaths: paths
-        }, () => {
-          console.log(this.data.tempFilePaths)
-        })
+        for (var i = 0; i < path.length; i++) {
+          wx.uploadFile({
+            url: app.globalData.baseHttpUrl + '/api-web/file/upload',
+            filePath: path[i],
+            name: 'file',
+            formData: {
+              customerId: app.globalData.userInfo.id,
+              type: 'SW1804',
+              id: ''
+            },
+            header: {
+              "Content-Type": "multipart/form-data",
+              'Authorization': wx.getStorageSync('token'),
+              'login-type': 'wx'
+            },
+            success: function(_res) {
+              var data  = JSON.parse(_res.data)
+              if (data.code === '100000') {
+                paths.push(data.data.url)
+                if (fileId === '') {
+                  fileId = data.data.fileId
+                } else {
+                  fileId += ',' + data.data.fileId
+                }
+                that.setData({
+                  tempFilePaths: paths,
+                  fileId: fileId
+                })
+                wx.hideToast()
+              } else {
+                wx.hideToast()
+                dialog.showToast('上传文件失败...', 'error', '', 2000)
+              }
+            },
+            fail: function(err) {
+              wx.hideToast()
+            }
+          })
+        }
       }
     })
   },
@@ -217,7 +265,6 @@ Page({
     });
     this.onCloseReason()
   },
-
 
   /**
    * 选择退款方式
@@ -290,6 +337,7 @@ Page({
       refundAmount: _refundAmount,
       refundAmountStr: '￥' + _refundAmount
     });
+    console.log(this.data.refundAmount)
   },
 
   onClick(event) {
@@ -297,5 +345,52 @@ Page({
     this.setData({
       radio: name,
     });
+  },
+
+  refundSubmit: function() {
+    var that = this
+    if(that.data.reason === '请选择') {
+      dialog.dialog('提示', '请选择申请原因!', false, '确定')
+      return
+    }
+    if (that.data.refundType === '请选择') {
+      dialog.dialog('提示', '请选择退款方式!', false, '确定')
+      return
+    }
+    if (that.data.contentLen === 0) {
+      dialog.dialog('提示', '请输入具体的申请内容，方便我们为您服务!', false, '确定')
+      return
+    }
+    let param = {
+      customerId: app.globalData.userInfo.id,
+      orderId: that.data.order.id,
+      orderDetailId: that.data.orderDetailItem.id,
+      goodsId: that.data.orderDetailItem.goodsId,
+      aftersaleType: that.data.pageType, 
+      aftersaleStatus: 'SW0802',
+      aftersaleReason: that.data.reason,
+      applyFile: that.data.fileId,
+      refundPoint: that.data.refundPoint,
+      usePointAmount: that.data.usePointAmount,
+      getPointAmount: that.data.getPointAmount,
+      refundAmount: that.data.refundAmount,
+      refundType: that.data.refundTypeDic,
+      refundQuality: that.data.applyNum,
+      refundRemark: that.data.remark,
+      returnType: that.data.backType == '请选择' ? '' : that.data.backTypeDic
+    }
+    console.log(param)
+    http('/api-web/orderAftersale/submitOrderAftersale', param, '', 'post').then(res => {
+      if (res.success) {
+        dialog.showToast('提交成功', 'success', '', 2000)
+        // 返回申请列表
+        wx.redirectTo({
+          url: '/pages/my/order-refund/orderRefund?id=' + escape(app.globalData.userInfo.id) + '&type=SW0801'
+        })
+      } else {
+        dialog.dialog('错误', '提交出现错误，请稍后再试，抱歉!', false, '确定')
+        return
+      }
+    })
   }
 })

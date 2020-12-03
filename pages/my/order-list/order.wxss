@@ -195,6 +195,7 @@
   margin-right: 20rpx;
   background-color: #f7f7f7;
   display: inline-block;
+  border-radius: 10rpx;
 }
 
 .goods-img-container .goods-count{

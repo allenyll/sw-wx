@@ -105,7 +105,7 @@
   <!-- 内容栏 -->
   <view class="my-content" style="">
     <view class="item">
-      <view bindtap="clickOrder" hover-class="none" class="a">
+      <view bindtap="clickOrder" hover-class="none" class="a" data-type="SW0700">
         <wxc-icon type="feedback" size="34" color="{{iconColor}}" style="margin:15rpx 0 10rpx 0;"></wxc-icon>
         <text class="txt">订单管理</text>
       </view>

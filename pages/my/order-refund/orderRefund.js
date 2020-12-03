@@ -45,7 +45,6 @@ Page({
     this.setData({
       loadingStatus: true
     })
-    //this.getOrderStatistics();
     this.getOrderRefundList()
     this._updateSelectedPage(this.data.tabIndex)
   },
@@ -63,49 +62,6 @@ Page({
     }
     return -1;
   },
-  getOrderStatistics: function () {
-    var that = this;
-    var param = {
-      customerId: that.data.customerId
-    }
-    http('/api-web/order/getOrderNum', param, '', 'post').then(res => {
-      if (res.code == '100000') {
-        var tabClass = that.data.tabClass;
-        if (res.data.unPayNum> 0) {
-          tabClass[0] = "red-dot"
-        } else {
-          tabClass[0] = ""
-        }
-        if (res.data.unReceiveNum > 0) {
-          tabClass[1] = "red-dot"
-        } else {
-          tabClass[1] = ""
-        }
-        if (res.data.deliveryNum > 0) {
-          tabClass[2] = "red-dot"
-        } else {
-          tabClass[2] = ""
-        }
-        if (res.data.appraisesNum > 0) {
-          tabClass[3] = "red-dot"
-        } else {
-          tabClass[3] = ""
-        }
-        if (res.data.finishNum > 0) {
-          //tabClass[4] = "red-dot"
-        } else {
-          //tabClass[4] = ""
-        }
-
-        console.log(tabClass)
-        that.setData({
-          tabClass: tabClass,
-        });
-      }else{
-        dialog.dialog('错误', '获取订单数量异常', false, '确定');
-      }
-    });
-  },
   getOrderRefundList: function () {
     var that = this;
     var param = {
@@ -115,7 +71,6 @@ Page({
       type: 'AFTERSALE'
     };
     http('/api-web/orderAftersale/getOrderRefundList', param, '', 'post').then(res => {
-      console.log(res.object)
       if (res.success) {
         that.setData({
           totalOrderList: res.object.orderList,
@@ -130,17 +85,44 @@ Page({
           var tempList = [];
           if(i == 0){
             tempList = orders
-          }
-          for (let j = 0; j < orderRefunds.length; j++) {
-            if (orderRefunds[j].aftersaleStatus == that.data.tabDicts[i]) {
-              tempList.push(orderRefunds[j])
+            for (let j = 0; j < orders.length; j++) {
+              var receiveTime = orders[j].receiveTime; // '2020-11-19 12:00:00';
+              if (receiveTime) {
+                //判断当前时间是否超过售后限制时间
+                var receiveDate = new Date(receiveTime);
+                var applyDate = new Date(receiveDate.getTime() + 7*24*60*60*1000); //7天之后
+                var curDate = new Date();
+                console.log(applyDate)
+                console.log(curDate)
+                // 当前时间早于限制时间，可以申请售后
+                if (curDate < applyDate) {
+                  orders[j].canApply = true
+                } else {
+                  orders[j].canApply = false
+                }
+              } else {
+                orders[j].canApply = true
+              }
+            }
+          } else if (i == 3) {
+            for (let j = 0; j < orderRefunds.length; j++) {
+              if (orderRefunds[j].aftersaleStatus != 'SW0802' && orderRefunds[j].aftersaleStatus != 'SW0804') {
+                tempList.push(orderRefunds[j])
+              }
+            }
+          } else {
+            for (let j = 0; j < orderRefunds.length; j++) {
+              if (orderRefunds[j].aftersaleStatus == that.data.tabDicts[i]) {
+                tempList.push(orderRefunds[j])
+              }
             }
           }
-          orderList.push({ 'status': i, 'isnull': tempList.length === 0, 'orderServiceList': tempList })
+          orderList.push({ 'status': i, 'isnull': tempList.length === 0, 'isOrder': i == 0,'orderServiceList': tempList })
         }
         this.setData({
           orderList: orderList
         });
+        console.log(orderList)
       } else {
         that.setData({
           orderList: 'null',
@@ -154,17 +136,21 @@ Page({
       })
     });
   },
-  clickOrderDetail: function (e) {
-    var orderId = e.currentTarget.dataset.id;
+  clickOrderSaleDetail: function (e) {
+    var query = {
+      id: e.currentTarget.dataset.id
+    }
     wx.navigateTo({
-      url: "/pages/order-details/orderDetails?id=" + orderId
+      url: '/pages/my/order-refund-check/orderRefundCheck?param=' + JSON.stringify(query)
     })
   },
-  cancelOrderTap: function (e) {
+  cancelApply: function (e) {
     var that = this;
-    var orderId = e.currentTarget.dataset.id;
+    var id = e.currentTarget.dataset.id;
+    var orderId = e.currentTarget.dataset.orderid;
+    var orderDetailId = e.currentTarget.dataset.orderdetailid;
     wx.showModal({
-      title: '确定要取消该订单吗？',
+      title: '确定要取消该申请单吗？',
       content: '',
       success: function (res) {
         if (res.confirm) {
@@ -172,51 +158,52 @@ Page({
             mask: true
           });
           var param = {
-            note: that.data.radio,
-            orderId: orderId
+            id: id,
+            orderId: orderId,
+            orderDetailId: orderDetailId
           }
-          http('/api-web/order/cancelMiniOrder', param, '', 'post').then(res => {
+          http('/api-web/orderAftersale/cancelOrderAftersale', param, '', 'post').then(res => {
             wx.hideLoading();
-            that.onClose();
-            if(res.code == '100000'){
+            if(res.success){
               that.onShow();
             }else{
-              dialog.dialog('错误', '取消订单异常，请联系管理员!', false, '确定');
+              dialog.dialog('错误', '取消申请单异常，请联系管理员!', false, '确定');
             }
           })
         }
       }
     })
   },
-  toPayTap: function (e) {
+  deleteApply: function (e) {
     var that = this;
-    var orderId = e.currentTarget.dataset.id;
-    var money = e.currentTarget.dataset.money;
-    var integration = e.currentTarget.dataset.integration;
-    wxpay.wxpay(app, money, orderId, '/pages/my/order-list/order', "order");
-  },
-  deleteTap(e) {
-    var that = this;
-    var orderId = e.currentTarget.dataset.id;
+    var id = e.currentTarget.dataset.id;
+    var orderId = e.currentTarget.dataset.orderid;
+    var orderDetailId = e.currentTarget.dataset.orderdetailid;
     wx.showModal({
-      title: '确定要删除该订单吗？',
+      title: '确定要删除该申请单吗？',
       content: '',
       success: function (res) {
         if (res.confirm) {
-          wx.showLoading();
-          http('/api-web/order/deleteOrder/' + orderId, '', '', 'post').then(res => {
+          wx.showLoading({
+            mask: true
+          });
+          var param = {
+            id: id,
+            orderId: orderId,
+            orderDetailId: orderDetailId
+          }
+          http('/api-web/orderAftersale/deleteOrderAftersale', param, '', 'post').then(res => {
             wx.hideLoading();
-            if (res.code == '100000') {
+            if(res.success){
               that.onShow();
-            } else {
-              dialog.dialog('错误', '删除订单异常，请联系管理员!', false, '确定');
+            }else{
+              dialog.dialog('错误', '删除申请单异常，请联系管理员!', false, '确定');
             }
           })
         }
       }
     })
   },
-
   handlerStart(e) {
     console.log('handlerStart')
     let { clientX, clientY } = e.touches[0];
@@ -307,17 +294,34 @@ Page({
     stv.offset = stv.windowWidth * activeTab;
     this.setData({ stv: this.data.stv })
   },
+
   toIndexPage: function () {
     wx.switchTab({
       url: "/pages/classification/index"
     });
   },
-  getCancelReason: function (e) {
-    var orderId = e.currentTarget.dataset.id;
-    this.setData({
-      show: true,
-      currentOrderId: orderId
+
+  deliverOrder: function (e) {
+    var query = {
+      id: e.currentTarget.dataset.id,
+      aftersaleNo: e.currentTarget.dataset.no,
+      applyTime: e.currentTarget.dataset.time,
+      attributes: e.currentTarget.dataset.attr,
+      goodsName: e.currentTarget.dataset.name,
+      applyNum: e.currentTarget.dataset.num,
+      pic: e.currentTarget.dataset.pic 
+    }
+    wx.navigateTo({
+      url: '/pages/my/order-refund-delivery/orderRefundDelivery?param=' + JSON.stringify(query)
     })
+  },
+
+  /**
+   * 
+   * @param 无法申请售后点击申请售后按钮提示 
+   */
+  canNotApply: function (e) {
+    dialog.dialog('提示', '该商品已经超过售后期，无法申请售后！', false, '确定');
   },
 
   /**

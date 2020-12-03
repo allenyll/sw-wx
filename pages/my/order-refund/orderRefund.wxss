@@ -108,12 +108,13 @@
 }
 
 .order-list .an-order {
-  width: 100%;
+  width: 95%;
+  margin: 10rpx auto;
+  border-radius: 20rpx;
   background-color: #fff;
-  margin-top: 20rpx;
 }
 
-.order-list .an-order .an-order-hd{
+.order-list .an-order-hd{
   width: 100%;
   height: 60rpx;
   line-height: 60rpx;
@@ -122,7 +123,7 @@
   font-size: 28rpx;
 }
 
-.order-list .an-order .an-order-hd .an-order-icon{
+.order-list .an-order-hd .an-order-icon{
   float: left;
   font-size: 36rpx;
   height: 60rpx;
@@ -147,18 +148,134 @@
 }
 
 .order-list .a-order .order-date {
-  padding: 0 30rpx;
+  width: 92%;
+  margin: 0 auto;
+  /* padding: 0 30rpx; */
   height: 88rpx;
   display: flex;
   justify-content: space-between;
   font-size: 26rpx;
   color: #000;
   align-items: center;
+  border-bottom: 1px solid #eee;
 }
 
 .order-list .a-order .order-date .red {
   font-size: 26rpx;
   color: #e64340;
+}
+
+.deal-tip {
+  float: left;
+  display: flex;
+  line-height: 80rpx;
+}
+
+.deal-tip .title {
+  font-size:20rpx; 
+  color: #999;
+  line-height: 83rpx;
+}
+
+.van-btn button{
+  color: #999;
+}
+
+.goods-item {
+  background-color: #fff;
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+  border-radius: 16rpx;
+}
+
+
+.refund-item {
+  width: 100%;
+  margin-left: 30rpx;
+  height: 60rpx;
+  line-height: 70rpx;
+  font-size: 32rpx;
+  font-weight: 700;
+}
+
+.goods-item  .a-goods {
+  width: 100%;
+  display: flex;
+}
+
+.goods-item  .a-goods .img-box {
+  width: 160rpx;
+  height: 160rpx;
+  overflow: hidden;
+  margin-right: 20rpx;
+}
+
+.goods-item .img-box .img {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 12rpx;
+}
+
+.goods-item  .a-goods .text-box {
+  width: 480rpx;
+  box-sizing: border-box;
+  padding-top: 10rpx;
+  position: relative;
+}
+
+.a-goods .text-box .arow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.a-goods .text-box .arow .goods-name {
+  width: 100%;
+  font-size: 22rpx;
+  color: #000;
+}
+
+.a-goods .text-box .arow01 {
+  margin-bottom: 10rpx;
+}
+
+.a-goods .text-box .arow .goods-label {
+  font-size: 20rpx;
+  color: #999;
+}
+
+.a-goods .text-box .arow .goods-label-item {
+  font-size: 22rpx;
+  color: #000;
+  align-self: flex-start;
+  margin-top: 16rpx;
+  margin-right: 18rpx;
+}
+
+.service-det {
+  width: 92%;
+  height: 80rpx;
+  background-color: #E8E8E8;
+  /* margin-top: 20rpx; */
+  /* margin-left: 20rpx; */
+  margin: 10px auto;
+  display: flex;
+  padding: 5px;
+}
+
+.service-det .service-status {
+  font-size: 22rpx;
+  line-height: 80rpx;
+  width: 20%;
+  margin-left: 10rpx;
+}
+
+.service-det .service-des {
+  width: 75%;
+  font-size: 22rpx;
+  padding: 10rpx;
+  margin-left: 10rpx;
+  color: #999;
 }
 
 .a-order  .goods-info, .goods-img-container {
@@ -237,11 +354,13 @@
   line-height:20px;
   padding-right:20px;
 }
-.order-list .a-order .price-box {
+
+.btn-box {
   position: relative;
   width: 675rpx;
   height: 100rpx;
   margin-left: 30rpx;
+  margin-top: 20rpx;
   display: flex;
   flex-direction: row;
   box-sizing: border-box;
@@ -251,12 +370,12 @@
   font-size: 26rpx;
 }
 
-.order-list .a-order .price-box .total-price {
+.btn-box .total-price {
   font-size: 26rpx;
   color: #e64340;
 }
 
-.a-order .price-box .btn {
+.btn-box .btn {
   width: 166rpx;
   height: 60rpx;
   box-sizing: border-box;
@@ -266,14 +385,14 @@
   margin-left: 20rpx;
 }
 
-.a-order .price-box .cancel-btn {
+.btn-box .cancel-btn {
   border: 1rpx solid #ccc;
   position: absolute;
   right: 216rpx;
   top: 20rpx;
 }
 
-.a-order .price-box .topay-btn {
+.btn-box .topay-btn {
   border: 1px solid #e64340;
   color: #e64340;
 }
@@ -330,4 +449,8 @@
 
 .van-card__footer {
   margin-top: 10rpx;
+}
+
+.van-count-down {
+  display: inline-block;
 }

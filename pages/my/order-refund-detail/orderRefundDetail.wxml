@@ -90,8 +90,8 @@
       <view class="flex-row">
         <view class="iconfont icon-weizhi" style='display:inline;font-size:21px;color: #999;'></view>
         <view class="text">
-          <text class="title">俞磊磊（132111）</text>
-          <text class="sub-title">没收到货，或与店家协商同意不用退货只退款</text>
+          <text class="title">{{order.receiverName}}{{order.receiverPhone}}</text>
+          <text class="sub-title">{{order.receiverProvince}}{{order.receiverCity}}{{order.receiverRegion}}{{order.receiverDetailAddress}}</text>
         </view>
         <view class="iconfont icon-youjiantou1" style='color:#999'></view>
       </view>

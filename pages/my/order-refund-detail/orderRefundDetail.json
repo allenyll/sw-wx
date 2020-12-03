@@ -3,7 +3,7 @@
   "navigationBarBackgroundColor": "#fff",
   "navigationBarTextStyle": "black",
   "usingComponents": {
-    "van-badge": "../../dist/packages/@vant/badge/index",
+    "van-badge": "../../../dist/packages/@vant/badge/index",
     "van-stepper": "../../../dist/packages/vant-weapp/stepper/index",
     "van-panel": "../../../dist/packages/@vant/panel/index",
     "van-button": "../../../dist/packages/@vant/button/index",

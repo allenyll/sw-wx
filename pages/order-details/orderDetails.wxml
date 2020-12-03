@@ -37,6 +37,18 @@
        </view>
       </view>
     </view>
+    <view wx:if="{{orderDetail.orderStatus == 'SW0708'}}" class="order-status">
+      <view class="icon-box">
+        <image class="icon" src="../images/order-details/icon-ddgb.png"></image>
+      </view>
+      <view class="right-text">
+        <view class="status red">已关闭</view>
+        <view class="des"> 
+          <view style="float: left;">关闭原因：</view>
+          <view>{{ orderDetail.note }}</view>
+       </view>
+      </view>
+    </view>
     <!-- <block wx:if="{{orderDetail.logisticsFee > 0}}">
       <view wx:if="{{orderDetail.logisticsFee > 0}}" class="wuliu-box">
         <view class="icon-box">

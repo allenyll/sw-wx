@@ -78,7 +78,7 @@ Page({
     this.setData({
       loadingStatus: true
     })
-    this.getOrderStatistics();
+    // this.getOrderStatistics();
     this.getOrderList()
     this._updateSelectedPage(this.data.tabIndex)
   },

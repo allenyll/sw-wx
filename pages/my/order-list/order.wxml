@@ -4,8 +4,7 @@
     <view wx:for="{{tabs}}" wx:key="unique" data-index="{{index}}" bindtap="handlerTabTap" class="tab {{activeTab==index?'active':''}}" style="width: {{stv.windowWidth/tabs.length}}px">
       {{item}}
       <wxc-badge wx:if="{{orderList[index].orderList.length>0 && item != '所有订单'}}" class="message__badge {{activeTab==index?'active':''}}">{{orderList[index].orderList.length}}</wxc-badge>
-      <!-- <view class="{{tabClass[index]}}"></view> -->
-      <!--{{orderList[index].orderList.length}}-->
+      <!-- <view class="{{tabClass[index]}}">{{orderList[index].orderList.length}}</view> -->
     </view>
     <view style="width: {{stv.lineWidth}}px; left: {{stv.offset/tabs.length}}px" class="under-line {{!stv.tStart? 'withAnimate': ''}}"></view>
   </view>
