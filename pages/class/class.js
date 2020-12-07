@@ -13,6 +13,9 @@ Page({
     scrollHeight: 0
   },
   onLoad: function (options) {
+    this.setData({ 
+      navHeight: app.globalData.navHeight
+    })
     this.getCategory();
   },
 

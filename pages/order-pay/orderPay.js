@@ -61,6 +61,7 @@ Page({
     var that = this;
     //显示收货地址标识
     that.setData({
+      navHeight: app.globalData.navHeight,
       isNeedLogistics: 1,
       orderType: e.orderType
     });

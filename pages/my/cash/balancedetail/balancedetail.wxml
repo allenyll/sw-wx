@@ -1,4 +1,5 @@
-<view class="myIntegral-wrap page" id="myIntegral">
+<navbar page-name="收支明细" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class="myIntegral-wrap page" id="myIntegral" style="position: relative; top: {{navHeight}}px">
   <scroll-view class="myIntegral-content" scroll-y="true"  bindscroll="fixedMessageNav" lower-threshold="116" bindscrolltolower="checkMoreMessageData">
     <view class="message-nav">
       <view class="type-item {{ currentMessageType == 'all' ? 'active' : '' }}" catchtap="setCurrentMessageType" data-type="all" >全部</view>

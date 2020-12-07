@@ -1,4 +1,5 @@
-<view class="stv-container">
+<navbar page-name="填写发货单" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class="stv-container" style="top: {{navHeight}}px">
   <view class="goods-item">
     <view class="delivery-item">快递商品</view>
     <view class="a-goods">

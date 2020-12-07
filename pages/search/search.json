@@ -4,7 +4,8 @@
   "navigationBarTextStyle": "black",
   "enablePullDownRefresh": true,
   "usingComponents": {
-    "van-search": "../../dist/packages/@vant//search/index",
-    "van-icon": "../../dist/packages/@vant/icon/index"
+    "navbar": "../../../templates/navbar/index",
+    "van-search": "../../dist/packages/vant-weapp//search/index",
+    "van-icon": "../../dist/packages/vant-weapp/icon/index"
   }
 } 

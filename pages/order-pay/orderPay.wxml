@@ -1,4 +1,5 @@
-<view class="container">
+<navbar page-name="待付款订单" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class="container" style="top: {{navHeight}}px">
   <form bindsubmit="createOrder" report-submit="true">
     <view class="address-box" wx:if="{{isNeedLogistics > 0}}">
       <view class="add-address" wx:if="{{!curAddressData}}">

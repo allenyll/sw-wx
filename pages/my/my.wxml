@@ -1,4 +1,5 @@
-<view class="container">
+<navbar page-name="个人中心" bg-color="#0387FE" icon-color="white" font-color="white" show-nav="{{false}}"></navbar>
+<view class="container" style="top: {{navHeight}}px">
   <view class="my-header" >
       <view class="avatar">
         <image wx:if="{{!hasUserInfo}}" bindtap="bindViewTap" class="userinfo-avatar" src="/pages/images/no-login.png" mode="cover"></image>
@@ -162,6 +163,7 @@
     </view>
 
   </view>
+  <view class="version" style="width:750rpx; bottom:0;font-size:24rpx;text-align:center;margin-top: 10rpx;">Copyright © 2017-2020 allenyll(GitHub ID)</view>
 </view>
-<view class="version" style="width:750rpx; bottom:0;font-size:24rpx;text-align:center;margin-top: 10rpx;">Copyright © 2017-2020 allenyll(GitHub ID)</view>
+
  

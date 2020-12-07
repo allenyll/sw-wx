@@ -50,6 +50,9 @@ Page({
     
   },
   onLoad: function (options) {
+    this.setData({ 
+      navHeight: app.globalData.navHeight
+    })
     this.getFootprintList();
   },
   onReady: function () {

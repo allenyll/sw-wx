@@ -1,5 +1,6 @@
 .view{
-  color:#999999
+  color:#999999;
+  position: relative;
 }
 .goods-list {
   width: 100%;

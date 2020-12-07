@@ -3,6 +3,7 @@
    "navigationBarBackgroundColor": "#fff",
   "navigationBarTextStyle": "black",
    "usingComponents": {
+    "navbar": "../../../templates/navbar/index",
     "show-empty-data": "../../../templates/show-empty-data/show-empty-data"
   }
 }

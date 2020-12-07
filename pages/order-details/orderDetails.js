@@ -46,6 +46,7 @@ Page({
     var orderId = e.id;
     this.data.orderId = orderId;
     this.setData({
+      navHeight: app.globalData.navHeight,
       orderId: orderId
     });
   },

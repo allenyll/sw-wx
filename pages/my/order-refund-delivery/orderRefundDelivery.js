@@ -52,6 +52,9 @@ Page({
 
   onLoad: function (options) {
     var that = this
+    that.setData({ 
+      navHeight: app.globalData.navHeight
+    })
     let param = JSON.parse(options.param)
     that.setData({
       orderDetail: param

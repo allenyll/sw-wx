@@ -53,9 +53,10 @@ Page({
     currentOrderId: ''
   },
   onLoad: function (options) {
-    console.log(unescape(options.id))
+    this.setData({ 
+      navHeight: app.globalData.navHeight
+    })
     var type = options.type
-    console.log(type)
     try {
       let { tabs } = this.data;
       var res = wx.getSystemInfoSync()
@@ -171,6 +172,7 @@ Page({
         this.setData({
           orderList: orderList
         });
+        console.log(that.data.orderList)
       } else {
         that.setData({
           orderList: 'null',

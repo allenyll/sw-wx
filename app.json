@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/my/my",
     "pages/my/order-list/order",
     "pages/my/order-refund/orderRefund",
@@ -19,7 +20,6 @@
     "pages/my/aboutus/aboutus",
     "pages/my/footprint/footprint",
     "pages/selCoupon/selCoupon",
-    "pages/index/index",
     "pages/class/class",
     "pages/logs/logs",
     "pages/login/login",
@@ -43,7 +43,8 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "SNU CHIC",
     "navigationBarTextStyle": "black",
-    "backgroundColor": "#fff"
+    "backgroundColor": "#fff",
+    "navigationStyle": "custom"
   },
   "tabBar": {
     "selectedColor": "#0387FE",

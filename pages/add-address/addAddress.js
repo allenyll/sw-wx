@@ -166,6 +166,9 @@ Page({
   },
   onLoad: function (e) {
     var that = this;
+    that.setData({ 
+      navHeight: app.globalData.navHeight
+    })
     this.initCityData(1);
     var id = e.id;
     if (id) {

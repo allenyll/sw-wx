@@ -14,6 +14,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      navHeight: app.globalData.navHeight
+    })
     let recharge_amount_min = app.globalData.recharge_amount_min;
     if (!recharge_amount_min) {
       recharge_amount_min = 0;

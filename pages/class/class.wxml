@@ -1,4 +1,5 @@
-<view class="container">
+<navbar page-name="商品分类" bg-color="white" icon-color="black" font-color="black" show-nav="{{false}}"></navbar>
+<view class="container" style="top: {{navHeight}}px">
   <!-- <view class="search">
     <navigator url="/pages/search/search" class="input">
       <image class="icon"></image>

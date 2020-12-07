@@ -28,16 +28,15 @@ Page({
   },
   
   editAddess: function (e) {
-    console.log(e.currentTarget.dataset)
     wx.navigateTo({
       url: "/pages/add-address/addAddress?id=" + e.currentTarget.dataset.id
     })
   },
   
   onLoad: function () {
-    console.log('onLoad')
-
-   
+    this.setData({ 
+      navHeight: app.globalData.navHeight
+    })
   },
   onShow : function () {
     let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。

@@ -1,4 +1,5 @@
-<view class="vip-container">
+<navbar page-name="我的会员卡" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class="vip-container" style="top: {{navHeight}}px">
   <view class="vip-header" style='background-color:	#FFA54F;'>
     <view class='vip-name'>
       普通会员

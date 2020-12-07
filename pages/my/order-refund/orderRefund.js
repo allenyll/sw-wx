@@ -20,9 +20,10 @@ Page({
     totalOrderList: []
   },
   onLoad: function (options) {
-    console.log(unescape(options.id))
+    this.setData({ 
+      navHeight: app.globalData.navHeight
+    })
     var type = options.type
-    console.log(type)
     try {
       let { tabs } = this.data;
       var res = wx.getSystemInfoSync()
@@ -88,9 +89,11 @@ Page({
             for (let j = 0; j < orders.length; j++) {
               var receiveTime = orders[j].receiveTime; // '2020-11-19 12:00:00';
               if (receiveTime) {
+                receiveTime = receiveTime.replace(/-/g, '/')
                 //判断当前时间是否超过售后限制时间
+                console.log(receiveTime)
                 var receiveDate = new Date(receiveTime);
-                var applyDate = new Date(receiveDate.getTime() + 7*24*60*60*1000); //7天之后
+                var applyDate = new Date(receiveDate.setDate(receiveDate.getDate() + 7)); //7天之后
                 var curDate = new Date();
                 console.log(applyDate)
                 console.log(curDate)

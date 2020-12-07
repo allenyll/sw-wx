@@ -1,4 +1,4 @@
-const APP = getApp();
+const app = getApp();
 const dialog = require('../../utils/dialog.js')  // 引入
 const http = require('../../utils/http.js')  // 引入
 import {
@@ -19,17 +19,17 @@ Page({
     showRate: true
   },
   onLoad: function (options) {
-    console.log(unescape(options.orderId))
     this.setData({
+      navHeight: app.globalData.navHeight,
       orderId: options.orderId
     })
     this.getOrder()
-    // APP.utils.getOrderById(options.orderId, (res) => {
+    // app.utils.getOrderById(options.orderId, (res) => {
     //   let goodsList = res.order_goods_info
     //   this.setData({
     //     orderId: options.orderId,
     //   }, () => {
-    //     let goodsInfo = APP.utils.getGoodsById(goodsList, options.goodsId)
+    //     let goodsInfo = app.utils.getGoodsById(goodsList, options.goodsId)
     //     this.setData({
     //       goodsInfo: goodsInfo
     //     })
@@ -91,7 +91,7 @@ Page({
   },
   // 图片预览
   previewImage(e) {
-    let id = APP.utils.getDataSet(e, 'id')
+    let id = app.utils.getDataSet(e, 'id')
     let that = this
     wx.previewImage({
       current: that.data.tempFilePaths[id],
@@ -100,7 +100,7 @@ Page({
   },
   // 删除预览图片
   deleltImage(e) {
-    let id = APP.utils.getDataSet(e, 'id')
+    let id = app.utils.getDataSet(e, 'id')
     console.log(id)
     let arr = this.data.tempFilePaths
     arr.splice(id, 1);
@@ -146,8 +146,8 @@ Page({
   },
   // 上传数据
   uploadData(imgs) {
-    APP.ajax({
-      url: APP.api.orderComments,
+    app.ajax({
+      url: app.api.orderComments,
       data: {
         content: this.data.commentTexts,
         goods_id: this.data.goodsInfo.goods_id,
@@ -164,7 +164,7 @@ Page({
           title: res.msg,
           icon: 'none',
           success: () => {
-            let params = APP.utils.paramsJoin({
+            let params = app.utils.paramsJoin({
               target: wx.getStorageSync('thisOrderList')
             })
             setTimeout(() => {
@@ -180,7 +180,7 @@ Page({
   // 上传图片
   uploadDIY(i, imgs) {
     wx.uploadFile({
-      url: APP.api.uploadFile,
+      url: app.api.uploadFile,
       filePath: this.data.tempFilePaths[i],
       header: {
         'auth': headers.auth,

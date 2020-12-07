@@ -1,4 +1,5 @@
-<scroll-view class="container" style="height: 100%;">
+<navbar page-name="搜索" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<scroll-view class="container" style="height: 100%;top: {{navHeight}}px;">
   <view class="search-header">
     <van-search
       value="{{ value }}"

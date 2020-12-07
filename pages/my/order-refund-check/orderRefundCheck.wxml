@@ -1,4 +1,5 @@
-<view class="stv-container">
+<navbar page-name="服务单详情" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class="stv-container" style="top: {{navHeight}}px">
   <view class="step-v">
     <!-- <view class="status">请您发货</view> -->
     <i-steps current="{{current}}">

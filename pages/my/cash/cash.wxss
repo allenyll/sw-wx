@@ -1,17 +1,18 @@
 .cash-container{
   background-color: #f8f8f8;
   color: #333;
+  position: relative;
 }
 .header{
   width: 100%;
-  height: 160px;
+  height: 130px;
   margin-bottom: 10px;
   background: white;
 }
 
 .header .blance{
-  height:80px;
-  line-height:80px;
+  height:70px;
+  line-height:70px;
   margin-left:10px;
   margin-top:20px;
   font-size:16px;
@@ -26,9 +27,9 @@
 
 .header .text2{
   display: block;
-  font-size:14px; 
-  height:20px;
-  line-height:20px;
+  font-size:10px; 
+  height:15px;
+  line-height:15px;
 }
 
 .header .money{

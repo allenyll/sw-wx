@@ -1,4 +1,5 @@
-<view class="container">
+<navbar page-name="订单详情" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class="container" style="top: {{navHeight}}px">
   <view wx:if="{{orderDetail.orderStatus == 'SW0701'}}" class="wait-pay">
     <van-notice-bar
       left-icon="volume-o"

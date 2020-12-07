@@ -1,4 +1,5 @@
-<view wx:if="{{canIUse}}">
+<navbar page-name="授权登录" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class="container" wx:if="{{canIUse}}" style="top: {{navHeight}}px">
     <view class='header'>
         <image src='../images/wx_login.png'></image>
     </view>

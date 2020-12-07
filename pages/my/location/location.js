@@ -1,7 +1,7 @@
 var amapFile = require('../../../lib/amap-wx.js');  //引入高德js
 var QQMapWX = require('../../../lib/qqmap-wx-jssdk.js');
 var config = require('../../../lib/config.js');      //引用我们的配置文件
-
+var app = getApp();
 Page({
   data: {
     markers: [],
@@ -12,6 +12,11 @@ Page({
       name: '南京环北批发市场二期二楼338',
       desc: '江苏省南京市秦淮区白下路368号'
     }
+  },
+  onLoad: function () {
+    this.setData({ 
+      navHeight: app.globalData.navHeight
+    })
   },
   onShow: function () {
     var that = this;

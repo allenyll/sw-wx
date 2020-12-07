@@ -37,6 +37,9 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+    that.setData({ 
+      navHeight: app.globalData.navHeight
+    })
     if (app.globalData.userInfo != null) {
       console.log(app.globalData.userInfo.gender)
       let gender = app.globalData.userInfo.gender

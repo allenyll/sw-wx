@@ -1,4 +1,5 @@
-<view class="container">
+<navbar page-name="商品列表" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class="container" style="top: {{navHeight}}px">
     <view class="cate-nav">
         <scroll-view scroll-x="true" class="cate-nav-body" style="width: 750rpx;" scroll-left="{{scrollLeft}}">
             <view  wx:for="{{navList}}" wx:key="index" class="item {{ id == item.id ? 'active' : ''}}" data-id="{{item.id}}" data-index="index" bindtap="switchCate">

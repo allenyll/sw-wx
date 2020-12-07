@@ -1,4 +1,5 @@
-<view class='view'>
+<navbar page-name="商品评价" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class='view' style="top: {{navHeight}}px">
   <view class='goods-list' wx:if="{{!showRate}}">
     <view class='a-goods' wx:for-items="{{goodsList}}" wx:key="index">
       <view class='img-box'>

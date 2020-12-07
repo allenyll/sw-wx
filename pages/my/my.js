@@ -27,6 +27,9 @@ Page({
    */
   onLoad: function (options) {
     console.log(this.data)
+    this.setData({ 
+      navHeight: app.globalData.navHeight
+    })
   },
 
   getUserInfo: function (e) {
@@ -44,9 +47,9 @@ Page({
         }
       })
       //授权成功后，跳转进入小程序首页
-      wx.switchTab({
-          url: '/pages/my/my'  
-      })
+      // wx.switchTab({
+      //     url: '/pages/my/my'  
+      // })
     } else {
       //用户按了拒绝按钮
       dialog.dialog('警告', '您点击了拒绝授权，将无法进入小程序，请授权之后再进入!!!', false, '返回授权')
@@ -180,9 +183,9 @@ Page({
               console.log(res)
               that.queryUserInfo();
               //用户已经授权过
-              wx.switchTab({
-                url: '/pages/my/my'
-              })
+              // wx.switchTab({
+              //   url: '/pages/my/my'
+              // })
             })
           }
         }
@@ -416,9 +419,9 @@ Page({
               //从数据库获取用户信息
               that.queryUserInfo();
               //用户已经授权过
-              wx.switchTab({
-                url: '/pages/my/my'
-              })
+              // wx.switchTab({
+              //   url: '/pages/my/my'
+              // })
             }
           });
         }

@@ -1,4 +1,5 @@
-<view class="container">
+<navbar page-name="我的足迹" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class="container" style="top: {{navHeight}}px">
   <view class="footprint">
     <view class="day-item" wx:for="{{footprintList}}" wx:key="index">
       <view class="day-hd">上次浏览时间：{{item.addTime}}</view>

@@ -9,7 +9,10 @@ Page({
     buyType: ''
   },
   onLoad: function (options) {
-    this.data.buyType = options.buyType
+    this.setData({ 
+      navHeight: app.globalData.navHeight,
+      buyType: options.buyType
+    })
     this.getCouponList()
   },
 

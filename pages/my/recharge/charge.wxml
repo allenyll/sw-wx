@@ -1,4 +1,5 @@
-<view class="charge-container">
+<navbar page-name="在线充值" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class="charge-container" style="top: {{navHeight}}px">
     <form bindsubmit="bindSave">
     <view class="form-box">
         <view class="row-wrap">

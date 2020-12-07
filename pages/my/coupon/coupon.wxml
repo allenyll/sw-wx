@@ -1,4 +1,5 @@
-<view class="container">
+<navbar page-name="我的优惠券" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class="container" style="top: {{navHeight}}px">
   <!-- <view class="coupon-form">
     <view class="input-box">
       <input class="coupon-sn" placeholder="请输入优惠码" />

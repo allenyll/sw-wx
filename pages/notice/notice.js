@@ -16,6 +16,10 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    that.setData({
+      navHeight: app.globalData.navHeight,
+      id: unescape(options.id)
+    })
     var param = {
       id: options.id,
       magType: 'SW2702'

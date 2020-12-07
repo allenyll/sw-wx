@@ -9,7 +9,7 @@ page{
 }
 
 .search-header{
-    position: fixed;
+    /* position: fixed; */
     top: 0;
     width: 750rpx;
     height: 135rpx;
@@ -72,7 +72,7 @@ page{
 .no-search{
     height: auto;
     overflow: hidden;
-    margin-top: 135rpx;
+    /* margin-top: 135rpx; */
 }
 
 .serach-keywords{

@@ -169,7 +169,7 @@ page {
   top: 0;
   width: 750rpx;
   background: white;
-  z-index: 50;
+  z-index: 9;
 }
 
 .header-input {

@@ -1,4 +1,5 @@
-<view class="container">
+<navbar page-name="SNU CHIC" bg-color="white" icon-color="black" font-color="black" show-nav="{{false}}"></navbar>
+<view class="container" style="top: {{navHeight}}px">
   <view wx:if="{{notices.length > 0}}" class="notice" style='background: white;'>
 
     <wxc-icon size='40' type="{{'notice'}}" style='margin-right:10rpx;'> </wxc-icon>

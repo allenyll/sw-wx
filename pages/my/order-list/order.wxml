@@ -1,3 +1,4 @@
+<navbar page-name="订单列表" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
 <view class="stv-container" style="top: {{navHeight}}px">
   <view class="tab-bar">
     <view wx:for="{{tabs}}" wx:key="unique" data-index="{{index}}" bindtap="handlerTabTap" class="tab {{activeTab==index?'active':''}}" style="width: {{stv.windowWidth/tabs.length}}px">

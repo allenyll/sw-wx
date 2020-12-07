@@ -1,4 +1,5 @@
-<view class="cash-container">
+<navbar page-name="余额" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class="cash-container" style="top: {{navHeight}}px">
   <view class="header">
     <view class="blance">
       <text class="text1">余额：<text class="money">￥{{balance}}</text></text>

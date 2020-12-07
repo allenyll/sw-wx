@@ -43,6 +43,7 @@ Page({
   onLoad: function (options) {
     console.log(unescape(options.id))
     this.setData({
+      navHeight: app.globalData.navHeight,
       id: unescape(options.id)
     })
     this.getPoint();

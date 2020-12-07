@@ -30,6 +30,9 @@ Page({
     });
   },
   onLoad: function () {
+    this.setData({ 
+      navHeight: app.globalData.navHeight
+    })
     this.getSearchKeyword();
   },
 

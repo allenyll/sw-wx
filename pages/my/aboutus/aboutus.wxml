@@ -1,4 +1,5 @@
-<view class="container">
+<navbar page-name="关于我们" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class="container" style="top: {{navHeight}}px">
   <view class="aboutus-header">
     <!-- <view style="width: 100%; height: 100%;">
       <image class="type-img" src="https://system-web-1257935390.cos.ap-chengdu.myqcloud.com/images/202099/23721602232537757.jpeg"></image>
@@ -7,7 +8,7 @@
   <view class="title">
     <text class="title-txt">SNU CHIC</text>
   </view>
-  <view class="content">
+  <view class="content" style="text-align: center;">
     <text class="content-txt">
    一间芝麻大的小铺 八仙过海各抒己见
 

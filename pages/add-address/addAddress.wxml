@@ -1,4 +1,5 @@
-<view class="container">
+<navbar page-name="新增地址" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class="container" style="top: {{navHeight}}px">
     <form bindsubmit="bindSave">
     <view class="form-box">
         <view class="row-wrap">

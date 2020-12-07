@@ -87,23 +87,27 @@ Page({
         reason: '快递'
       }
     ],
+    pageName: '退款'
   },
 
   onLoad: function (options) {
     console.log('测试')
     var that = this
+    that.setData({ 
+      navHeight: app.globalData.navHeight
+    })
     var type = options.type
     if ("SW2901" === type) {
-      wx.setNavigationBarTitle({
-        title: '退款' 
+      that.setData({ 
+        pageName: '退款' 
       })
     } else if ("SW2902" === type) {
-      wx.setNavigationBarTitle({
-        title: '换货' 
+      that.setData({ 
+        pageName: '换货' 
       })
     } else if ("SW2903" === type) {
-      wx.setNavigationBarTitle({
-        title: '退款退货' 
+      that.setData({ 
+        pageName: '退款退货' 
       })
     }
     let param = JSON.parse(options.param)

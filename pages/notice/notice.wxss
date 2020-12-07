@@ -2,6 +2,7 @@
   /* width: 750rpx; */
   padding: 15rpx;
   font-size: 25rpx;
+  position: relative;
 }
 .title {
   color:chocolate;

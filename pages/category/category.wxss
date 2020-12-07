@@ -2,7 +2,7 @@
     background: #f9f9f9;
 }
 .cate-nav{
-    position: fixed;
+    /* position: fixed; */
     left:0;
     top:0;
     z-index: 1000;
@@ -12,7 +12,7 @@
     height: 84rpx;
     white-space: nowrap;   
     background: #fff;
-    border-top: 1px solid rgba(0,0,0,.15);
+    /* border-top: 1px solid rgba(0,0,0,.15); */
     overflow: hidden;
 }
 
@@ -40,7 +40,7 @@
 }
 
 .cate-item{
-    margin-top: 94rpx;
+    margin-top: 5rpx;
     height: auto;
     overflow: hidden;
 }

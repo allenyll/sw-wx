@@ -7,6 +7,9 @@ Page({
     coupons:[]
   },
   onLoad: function () {
+    this.setData({ 
+      navHeight: app.globalData.navHeight
+    })
     this.getCouponList();
   },
   onShow : function () {

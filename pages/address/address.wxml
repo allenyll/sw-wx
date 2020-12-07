@@ -1,4 +1,5 @@
-<view class="container">
+<navbar page-name="收货地址" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class="container" style="top: {{navHeight}}px">
   <view class="address-list">
     <view class="a-address" wx:for-items="{{addressList}}" wx:key="index">
       <view class="left-text {{item.isDefault == 'SW1001'? 'active':''}}" bindtap="selectTap" data-id="{{item.id}}">
