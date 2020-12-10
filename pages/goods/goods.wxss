@@ -48,7 +48,7 @@ view,image,text,navigator {
 
 .goods-info{
     width: 750rpx;
-    height: 306rpx;
+    /* height: 306rpx; */
     overflow: hidden;
     background: #fff;
 }
@@ -73,6 +73,7 @@ view,image,text,navigator {
     margin-bottom: 5.208rpx;
     font-size: 41rpx;
     line-height: 41rpx;
+    font-weight: bold;
 }
 
 .goods-info .desc{
@@ -87,9 +88,9 @@ view,image,text,navigator {
 
 .goods-info .price{
     margin-top: 20rpx;
-    height: 35rpx;
-    font-size: 35rpx;
-    line-height: 35rpx;
+    height: 50rpx;
+    font-size: 50rpx;
+    line-height: 50rpx;
     color: #b4282d;
 }
 

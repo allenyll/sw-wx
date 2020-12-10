@@ -284,8 +284,10 @@ Page({
         list[parseInt(index)].number++;
         that.setGoodsList(that.getSaveHide(), that.totalPrice(), that.allSelect(), that.noSelect(), list);
       } else {
+        dialog.dialog('提示', e.currentTarget.dataset.name + ' 商品库存不足'+stock+'无法继续增加', false, '确定');
         list[parseInt(index)].number = stock;
         that.setGoodsList(that.getSaveHide(), that.totalPrice(), that.allSelect(), that.noSelect(), list);
+        return;
       }
 
       that.setData({
@@ -311,8 +313,10 @@ Page({
         list[parseInt(index)].number++;
         that.setGoodsList(that.getSaveHide(), that.totalPrice(), that.allSelect(), that.noSelect(), list);
       } else {
+        dialog.dialog('提示', e.currentTarget.dataset.name + ' 商品库存不足剩余'+stock+'无法继续增加', false, '确定');
         list[parseInt(index)].number = stock;
         that.setGoodsList(that.getSaveHide(), that.totalPrice(), that.allSelect(), that.noSelect(), list);
+        return;
       }
       
       that.setData({

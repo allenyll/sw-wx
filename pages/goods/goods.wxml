@@ -16,11 +16,11 @@
         <text class="name">{{goods.goodsName}}</text>
         <text class="desc" wx:if="{{goods.goodsBrief}}">{{goods.goodsBrief}}</text>
         <text class="price">￥{{goods.price}}</text>
-        <view class="brand" wx:if="{{brand.brandName}}">
+        <!-- <view class="brand" wx:if="{{brand.brandName}}">
           <navigator url="../brandDetail/brandDetail?id={{brand.brandId}}">
             <text>{{brand.brandName}}</text>
           </navigator>
-        </view>
+        </view> -->
       </view>
     </view>
     <view class="section-nav section-attr" bindtap="switchAttrPop">
