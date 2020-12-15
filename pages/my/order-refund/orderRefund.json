@@ -3,6 +3,7 @@
   "navigationBarBackgroundColor": "#fff",
   "navigationBarTextStyle": "black",
   "usingComponents": {
+    "backTop": "../../../templates/backTop/index",
     "navbar": "../../../templates/navbar/index",
     "wxc-abnor": "../../../dist/packages/@minui/wxc-abnor/dist/index",
     "wxc-loading": "../../../dist/packages/@minui/wxc-loading/dist/index",

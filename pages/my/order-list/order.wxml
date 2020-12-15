@@ -1,4 +1,5 @@
 <navbar page-name="订单列表" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<backTop show-back="{{showBack}}" bindshowBack="showBack"></backTop>
 <view class="stv-container" style="top: {{navHeight}}px">
   <view class="tab-bar">
     <view wx:for="{{tabs}}" wx:key="unique" data-index="{{index}}" bindtap="handlerTabTap" class="tab {{activeTab==index?'active':''}}" style="width: {{stv.windowWidth/tabs.length}}px">
@@ -30,7 +31,7 @@
       <view wx:else>
         <view wx:for-items="{{orderList}}" wx:key="id">
           <swiper-item style="overflow: visible;border-radius: 50%;" class="one-scene">
-            <scroll-view style="height:100%" scroll-y>
+            <scroll-view style="height:100%" scroll-y scroll-top='{{topNum}}' bindscroll="scrollFn" bindscrolltolower="scrollHandler">
               <view wx:if="{{item.isnull}}" class="no-order">
                 <wxc-abnor type="ORDER" title='您还没有相关订单~'></wxc-abnor>
               </view>

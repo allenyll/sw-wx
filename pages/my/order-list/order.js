@@ -4,6 +4,9 @@ var wxpay = require('../../../utils/pay.js')
 var app = getApp()
 Page({
   data: {
+    showBack: false,
+    // scroll-view 返回顶部设置需要
+    topNum: 0,
     tabIndex: 0,
     tabs: ["所有订单", "待付款", "待发货", "待收货", "待评价"],
     tabDicts: ["SW0700", "SW0701", "SW0702", "SW0703", "SW0704"],
@@ -82,6 +85,33 @@ Page({
     // this.getOrderStatistics();
     this.getOrderList()
     this._updateSelectedPage(this.data.tabIndex)
+  },
+  /**
+   * 获取滚动条当前位置 scroll-view 
+   * @param {*} e 
+   */
+  scrollFn: function(e){
+    console.log(e)
+    if (e.detail.scrollTop > 400) {
+      this.setData({
+        showBack: true
+      })
+    } else {
+      this.setData({
+        showBack: false
+      })
+    }
+  },
+  /**
+   * 隐藏返回顶部按钮 scroll-view
+   * @param e 
+   */
+  showBack: function(e) {
+    console.log(e)
+    this.setData({
+      showBack: false,
+      topNum: 0
+    })
   },
   /*
   * 获取某个元素下标
@@ -359,7 +389,10 @@ Page({
     this.setData({ stv: this.data.stv })
   },
   handlerTabTap(e) {
-    console.log('handlerTapTap', e.currentTarget.dataset.index)
+    this.setData({
+      showBack: false,
+      topNum: 0
+    })
     this._updateSelectedPage(e.currentTarget.dataset.index);
   },
   //事件处理函数
@@ -398,5 +431,17 @@ Page({
     this.setData({
       radio: name,
     });
-  }
+  },
+  // 加载更多
+  scrollHandler: function () {
+    console.log("fenye-----")
+    // if(this.data.lastpage > page){
+    //   this.loadData(page); 
+    // }else{
+    //   wx.showModal({
+    //     title: '到底了',
+    //     content: '请休息一会再看呗！',
+    //   })
+    // }
+  },
 })

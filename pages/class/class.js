@@ -10,13 +10,13 @@ Page({
     scrollLeft: 0,
     scrollTop: 0,
     goodsCount: 0,
-    scrollHeight: 0
+    scrollHeight: 0,
+    classId: ''
   },
   onLoad: function (options) {
     this.setData({ 
       navHeight: app.globalData.navHeight
     })
-    this.getCategory();
   },
 
   onPullDownRefresh() {  
@@ -39,21 +39,39 @@ Page({
     // 加载商品分类
     http('/api-web/category/tree', param, '', 'GET').then(res => {
       if (res.code == '100000') {
-        that.setData({
-          navList: res.data.list,
-          currentCategory: res.data.list[0]
-        });
+        var list = res.data.list;
+        if (that.data.classId) {
+          for (var i=0; i<list.length; i++) {
+            if (list[i].id === that.data.classId) {
+              that.setData({
+                navList: res.data.list,
+                currentCategory: list[i]
+              });
+            }
+          }
+        } else {
+          that.setData({
+            navList: res.data.list,
+            currentCategory: res.data.list[0]
+          });
+        }
+        wx.hideLoading();
+      } else {
         wx.hideLoading();
       }
     });
   },
   getCurrentCategory: function (id) {
     let that = this;
+    wx.showLoading({
+      title: '加载中...',
+    });
     http('/api-web/category/'+id, '', '', 'get')
       .then(function (res) {
         that.setData({
           currentCategory: res.data.tree[0]
         });
+        wx.hideLoading();
       });
   },
   onReady: function () {
@@ -61,6 +79,10 @@ Page({
   },
   onShow: function () {
     // 页面显示
+    this.setData({ 
+      classId: app.globalData.classId
+    })
+    this.getCategory();
   },
   onHide: function () {
     // 页面隐藏

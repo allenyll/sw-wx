@@ -13,9 +13,9 @@
     </view> -->
     <view class="goods-info">
       <view class="c">
-        <text class="name">{{goods.goodsName}}</text>
-        <text class="desc" wx:if="{{goods.goodsBrief}}">{{goods.goodsBrief}}</text>
-        <text class="price">￥{{goods.price}}</text>
+        <view class="price">￥<text class="price-mon">{{goods.price}}.00</text></view>
+        <view class="name">{{goods.goodsName}}</view>
+        <view class="desc" wx:if="{{goods.goodsBrief}}">{{goods.goodsBrief}}</view>
         <!-- <view class="brand" wx:if="{{brand.brandName}}">
           <navigator url="../brandDetail/brandDetail?id={{brand.brandId}}">
             <text>{{brand.brandName}}</text>

@@ -15,7 +15,8 @@ Page({
     loadmoreText: '正在加载更多数据',
     nomoreText: '全部加载完成',
     nomore: false,
-    totalPages: 1
+    totalPages: 1,
+    hasGoods: false
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
@@ -40,6 +41,7 @@ Page({
   },
   getCategoryInfo: function () {
     let that = this;
+    
     http('/api-web/category/getCategoryInfo/' + this.data.id, null, '', 'get')
       .then(function (res) {
         if (res.code === '100000') {
@@ -63,7 +65,7 @@ Page({
             });
           }
           that.getGoodsList();
-
+          
         } else {
           //显示错误信息
         }
@@ -103,7 +105,9 @@ Page({
 
   getGoodsList: function () {
     var that = this;
-
+    wx.showLoading({
+      title: '加载中...',
+    })
     if (that.data.totalPages <= that.data.page-1) {
       that.setData({
         nomore: true
@@ -120,8 +124,19 @@ Page({
             page: res.data.currentPage + 1,
             totalPages: res.data.totalPage
           });
+          if (that.data.goodsList.length === 0) {
+            that.setData({
+              hasGoods: true
+            });
+          } else {
+            that.setData({
+              hasGoods: false
+            });
+          }
+          wx.hideLoading({})
         }else{
           // 获取商品失败
+          wx.hideLoading({})
         }
       });
   },

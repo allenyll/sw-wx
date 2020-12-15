@@ -3,6 +3,7 @@
   "enablePullDownRefresh": true,
   "navigationBarTextStyle": "black",
   "usingComponents": {
+    "backTop": "../../../templates/backTop/index",
     "navbar": "../../../templates/navbar/index",
     "wxc-icon": "../../dist/packages/@minui/wxc-icon/dist/index",
     "wxc-elip": "../../dist/packages/@minui/wxc-elip/dist/index",

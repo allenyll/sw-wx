@@ -11,7 +11,7 @@ page{
 .aboutus-header{
   width: 750rpx;
   height: 375rpx;
-  background: url(https://system-web-1257935390.cos.ap-chengdu.myqcloud.com/images/202099/23721602232537757.jpeg) no-repeat;
+  background: url(https://system-web-1257935390.cos.ap-chengdu.myqcloud.com/images/20201210/31101607602515653.JPG) no-repeat;
   background-size:cover;
   background-position: center center;
 }

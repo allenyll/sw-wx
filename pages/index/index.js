@@ -12,7 +12,9 @@ Page({
     banner: [],
     newGoods: [],
     hotGoods: [],
-    swiperCurrent: 0
+    navList: [],
+    swiperCurrent: 0,
+    showBack: false
   },
 
   //事件处理函数
@@ -81,6 +83,47 @@ Page({
         dialog.dialog('错误', '获取新品失败，请联系管理员!', false, '确定');
       }
     });
+    // 加载商品分类
+    http('/api-web/category/tree', '', '', 'GET').then(res => {
+      if (res.code == '100000') {
+        that.setData({
+          navList: res.data.list
+        });
+      }
+    });
+  },
+  clickCategory: function (event) {
+    var id = event.currentTarget.dataset.id
+    app.globalData.classId = id
+    wx.switchTab({
+      url: '/pages/class/class',
+    })
+
+  },
+  /**
+   * 获取滚动条当前位置
+   * @param {*} e 
+   */
+  onPageScroll: function(e){
+    if (e.scrollTop > 400) {
+      this.setData({
+        showBack: true
+      })
+    } else {
+      this.setData({
+        showBack: false
+      })
+    }
+  },
+  /**
+   * 隐藏返回顶部按钮
+   * @param e 
+   */
+  showBack: function(e) {
+    console.log(e)
+    this.setData({
+      showBack: false
+    })
   },
   /**
    * 生命周期函数--监听页面加载
