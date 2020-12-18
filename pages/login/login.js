@@ -60,16 +60,14 @@ Page({
 
   queryUserInfo: function () {
     var that = this;
-    http('/api-web/customer/queryUserByOpenId?openid=' + app.globalData.openid,'', '', 'post').then(res => {
+    http('/api-web/customer/queryUserByOpenId?openid=' + wx.getStorageSync('openid'),'', '', 'post').then(res => {
       if (!res.success) {
         dialog.dialog('警告', '授权失败!!!', false, '返回授权')
-        reject('授权失败!!!')
         return
       }
       var user = res.object;
       if (undefined == user) {
         dialog.dialog('警告', '授权失败!!!', false, '返回授权')
-        reject('授权失败!!!')
         return
       }
       app.globalData.userInfo = user;

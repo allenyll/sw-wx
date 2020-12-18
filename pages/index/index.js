@@ -33,73 +33,111 @@ Page({
     })
   },
 
-  getData: function() {
+  getData: async function() {
     var that = this
     var param = {
       adType: 'SW2601',
       msgType: 'SW2702'
-    }
+    };
     // 通知
-    http('/api-web/message/getMessageListByType', param, '', 'post').then(res => {
-      if (res.code == '100000') {
-        that.setData({
-          notices: res.data.messageList
-        })
-        console.log(that.data.notices.length)
-      } else {
-        dialog.dialog('错误', '获取通知失败，请联系管理员!', false, '确定');
-      }
-    });
+    await that.getMessages(param)
     // 轮播
-    http('/api-web/ad/getAdList', param, '', 'post').then(res => {
-      if (res.code == '100000') {
-        that.setData({
-          banner: res.data.adList
-        })
-        console.log(that.data.banner)
-      } else {
-        dialog.dialog('错误', '获取轮播图失败，请联系管理员!', false, '确定');
-      }
-    });
+    await that.getAds(param)
     // 新品
-    http('/api-web/goods/getGoodsListByType', {goodsType: 'new'}, '', 'post').then(res => {
-      if (res.code == '100000') {
-        that.setData({
-          newGoods: res.data.goodsList
-        })
-        console.log(that.data.newGoods)
-      } else {
-        dialog.dialog('错误', '获取新品失败，请联系管理员!', false, '确定');
-      }
-    });
+    await that.getNewGoods(param)
     // 热卖
-    http('/api-web/goods/getGoodsListByType', { goodsType: 'hot' }, '', 'post').then(res => {
-      if (res.code == '100000') {
-        that.setData({
-          hotGoods: res.data.goodsList
-        })
-        console.log(that.data.hotGoods)
-      } else {
-        dialog.dialog('错误', '获取新品失败，请联系管理员!', false, '确定');
-      }
-    });
+    await that.getHotGoods(param)
     // 加载商品分类
-    http('/api-web/category/tree', '', '', 'GET').then(res => {
-      if (res.code == '100000') {
-        that.setData({
-          navList: res.data.list
-        });
-      }
-    });
+    await that.getCategory(param)
   },
+
+  getMessages: function(param) {
+    var that = this
+    return new Promise((resolve, reject) => {
+      http('/api-web/message/getMessageListByType', param, '', 'post').then(res => {
+        if (res.code == '100000') {
+          that.setData({
+            notices: res.data.messageList
+          })
+        } else {
+          dialog.dialog('错误', '获取通知失败，请联系管理员!', false, '确定');
+        }
+        resolve(res)
+      });
+    })
+  },
+
+  getAds: function(param) {
+    var that = this
+    return new Promise((resolve, reject) => {
+      http('/api-web/ad/getAdList', param, '', 'post').then(res => {
+        if (res.code == '100000') {
+          that.setData({
+            banner: res.data.adList
+          })
+        } else {
+          dialog.dialog('错误', '获取轮播图失败，请联系管理员!', false, '确定');
+        }
+        resolve(res)
+      });
+    })
+  },
+
+  getNewGoods: function(param) {
+    var that = this
+    return new Promise((resolve, reject) => {
+      http('/api-web/goods/getGoodsListByType', {goodsType: 'new'}, '', 'post').then(res => { 
+        if (res.code == '100000') { 
+          that.setData({ 
+            newGoods: res.data.goodsList 
+          }) 
+        } else { 
+          dialog.dialog('错误', '获取新品失败，请联系管理员!', false, '确定'); 
+        }
+        resolve(res)
+      })
+    })
+  },
+
+  getHotGoods: function(param) {
+    var that = this
+    return new Promise((resolve, reject) => {
+      http('/api-web/goods/getGoodsListByType', { goodsType: 'hot' }, '', 'post').then(res => {
+        if (res.code == '100000') {
+          that.setData({
+            hotGoods: res.data.goodsList
+          })
+          console.log(that.data.hotGoods)
+        } else {
+          dialog.dialog('错误', '获取新品失败，请联系管理员!', false, '确定');
+        }
+        resolve(res)
+      });
+    })
+  },
+
+  getCategory: function(param) {
+    var that = this
+    return new Promise((resolve, reject) => {
+      http('/api-web/category/tree', '', '', 'GET').then(res => {
+        if (res.code == '100000') {
+          that.setData({
+            navList: res.data.list
+          });
+        }
+        resolve(res)
+      });
+    })
+  },
+
   clickCategory: function (event) {
     var id = event.currentTarget.dataset.id
     app.globalData.classId = id
     wx.switchTab({
       url: '/pages/class/class',
     })
-
   },
+
   /**
    * 获取滚动条当前位置
    * @param {*} e 

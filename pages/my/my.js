@@ -176,6 +176,7 @@ Page({
           if (res.code) {
             const param = {
               code: res.code,
+              mode: 'sweb_wx',
               iv: e.detail.iv,
               encryptedData: e.detail.encryptedData
             }

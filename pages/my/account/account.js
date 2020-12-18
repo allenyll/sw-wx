@@ -89,7 +89,7 @@ Page({
     var that = this
     var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //正则表达式
     var param = {
-      openid: app.globalData.openid
+      openid: wx.getStorageSync('openid')
     }
     if (that.data.email != '') {
       if (!reg.test(that.data.email)) {

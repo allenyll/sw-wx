@@ -26,7 +26,8 @@ function wxpay(app, money, orderId, redirectUrl, type) {
       nextAction: nextAction,
       openid: wx.getStorageSync('openid'),
       customerId: app.globalData.userInfo.id,
-      orderId: orderId
+      orderId: orderId,
+      mode: 'sweb_wx'
     },
     //method:'POST',
     success: function (res) {

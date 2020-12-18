@@ -5,31 +5,32 @@ App({
    */
   onLaunch: function () {
     var that = this;
-    wx.login({
-      success: res => {
-        if (res.code) {
-          wx.request({
-            url: that.globalData.authUrl+'/wx/auth/token',
-            data: {
-              code: res.code
-            },
-            method: "POST",
-            header: {
-              'content-type': 'application/json',
-              'login-type': 'wx'
-            },
-            success: function (res) {
-              var token = res.data.object.accessToken;
-              var openid = res.data.object.openid;
-              that.globalData.openid = openid;
-              that.globalData.token = token;
-              wx.setStorageSync('openid', openid);
-              wx.setStorageSync('token', token);
-            }
-          });
-        }  
-      }
-    });
+    // wx.login({
+    //   success: res => {
+    //     if (res.code) {
+    //       wx.request({
+    //         url: that.globalData.authUrl+'/wx/auth/token',
+    //         data: {
+    //           code: res.code,
+    //           mode: 'sweb_wx'
+    //         },
+    //         method: "POST",
+    //         header: {
+    //           'content-type': 'application/json',
+    //           'login-type': 'wx'
+    //         },
+    //         success: function (res) {
+    //           var token = res.data.object.accessToken;
+    //           var openid = res.data.object.openid;
+    //           that.globalData.openid = openid;
+    //           that.globalData.token = token;
+    //           wx.setStorageSync('openid', openid);
+    //           wx.setStorageSync('token', token);
+    //         }
+    //       });
+    //     }  
+    //   }
+    // });
     let menuButtonObject = wx.getMenuButtonBoundingClientRect();
     wx.getSystemInfo({
       success: res => {
@@ -120,6 +121,9 @@ App({
     baseHttpUrl: 'http://localhost:10001',
     baseUrl: 'https://localhost',
     authUrl: 'https://localhost:8443',
+    // baseHttpUrl: 'http://www.allenyll.com',
+    // baseUrl: 'https://www.allenyll.com',
+    // authUrl: 'https://www.allenyll.com:8443',
     bearer: 'Bearer ',
     logType: ',JWT_WX',
     onLoadStatus: true,

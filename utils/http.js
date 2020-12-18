@@ -21,7 +21,8 @@ const http = (url, data, header, method) => {
                 wx.request({
                   url: app.globalData.authUrl+'/wx/auth/token',
                   data: {
-                    code: res.code
+                    code: res.code,
+                    mode: 'sweb_wx'
                   },
                   method: "POST",
                   header: {
