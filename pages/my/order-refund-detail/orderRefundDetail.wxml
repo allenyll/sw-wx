@@ -67,8 +67,8 @@
           <view class='title'>添加图片：（最多3张）</view>
           <view class='image-input'>
             <view class='image-list' wx:if="{{tempFilePaths.length}}" wx:for="{{tempFilePaths}}" wx:key="key">
-              <van-badge style="position:absolute;z-index:10;width:20px;height:20px;" catchtap='deleltImage' data-id='index' info="X" />
-              <view class='add-image' catchtap='previewImage' data-id='index'>
+              <van-badge style="position:absolute;z-index:10;width:20px;height:20px;" catchtap='deleltImage' data-id='{{index}}' info="X" />
+              <view class='add-image' catchtap='previewImage' data-id='{{index}}'>
                 <image class='up-img' src="{{item}}" mode="aspectFill" />
               </view>
             </view>
