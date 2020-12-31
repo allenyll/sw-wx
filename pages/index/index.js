@@ -33,6 +33,24 @@ Page({
     })
   },
 
+  getUser: function() {
+    var openid = wx.getStorageSync('openid');
+    http('/api-web/customer/queryUserByOpenId?openid=' + openid,'', '', 'post').then(res => {
+      if (!res.success) {
+        dialog.dialog('警告', '授权失败!!!', false, '返回授权')
+        reject('授权失败!!!')
+        return
+      }
+      var user = res.object;
+      if (undefined === user) {
+        dialog.dialog('警告', '授权失败!!!', false, '返回授权')
+        reject('授权失败!!!')
+        return
+      }
+      app.globalData.userInfo = user
+    })
+  },
+
   getData: async function() {
     var that = this
     var param = {
@@ -41,6 +59,18 @@ Page({
     };
     // 通知
     await that.getMessages(param)
+    // wx.getSetting({
+    //   success: function (res) {
+    //     if (res.authSetting['scope.userInfo']) {
+    //       wx.getUserInfo({
+    //         success: function (res) {
+    //           //从数据库获取用户信息
+    //           that.getUser();
+    //         }
+    //       });
+    //     }
+    //   }
+    // })
     // 轮播
     await that.getAds(param)
     // 新品

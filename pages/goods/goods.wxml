@@ -149,10 +149,13 @@
         </view>
       </view>
       <view class="popup-btn">
-        <view class="popup-join-btn-l" bindtap="buyGoods">
+        <view wx:if="{{!hasSku}}" class="popup-join-btn" bindtap="">
+          暂无库存
+        </view>
+        <view wx:if="{{hasSku}}" class="popup-join-btn-l" bindtap="buyGoods">
           立即购买
         </view>
-        <view class="popup-join-btn-r" bindtap="addToCart">
+        <view wx:if="{{hasSku}}" class="popup-join-btn-r" bindtap="addToCart">
           加入购物车
         </view>
       </view>

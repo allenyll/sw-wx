@@ -49,9 +49,7 @@ Page({
           brand: res.data.obj.brand,
           gallery: res.data.obj.fileList,
           specsList: res.data.obj.specsList,
-          skuStockList: res.data.obj.skuStockList,
-          buyNumMax: res.data.obj.stock,
-          buyNumber: (res.data.obj.stock > 0) ? 1 : 0
+          skuStockList: res.data.obj.skuStockList
         });
         this.getSelectSpec(res.data.obj.specsList);
         this.setSkuPrice(that.data.specValue)
@@ -107,8 +105,18 @@ Page({
         this.setData({
           skuPrice: skuList[i].skuPrice,
           sku: skuList[i],
-          hasSku: true
+          buyNumMax: skuList[i].skuStock,
+          buyNumber: (skuList[i].skuStock > 0) ? 1 : 0
         });
+        if (skuList[i].skuStock > 0) {
+          this.setData({
+            hasSku: true,
+          })
+        } else {
+          this.setData({
+            hasSku: false,
+          })
+        }
       }
     }
   },
